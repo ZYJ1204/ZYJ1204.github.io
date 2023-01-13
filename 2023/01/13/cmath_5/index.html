@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>2.3.自然推理系统 | 柚子的技术岛</title><meta name="author" content="Bug Testing"><meta name="copyright" content="Bug Testing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2.3 自然推理系统2.3.1 推理 数理逻辑的主要任务是用逻辑的方法研究数学中的推理。   所谓推理是指从前提出发，应用推理规则推出结论的思维过程   任何一个推理都由前提和结论两部分组成。前提就是推理所根据的已知命题，结论则是从前提出发通过推理而得到的新命题。   数理逻辑从形式结构上来研究推理的有效性  【定义 2.8】 设H1，H2，…，Hn和C都是命题公式，若H1∧H2∧…∧Hn&amp;#x3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.3.自然推理系统">
+<meta property="og:url" content="https://zyj1204.github.io/2023/01/13/cmath_5/index.html">
+<meta property="og:site_name" content="柚子的技术岛">
+<meta property="og:description" content="2.3 自然推理系统2.3.1 推理 数理逻辑的主要任务是用逻辑的方法研究数学中的推理。   所谓推理是指从前提出发，应用推理规则推出结论的思维过程   任何一个推理都由前提和结论两部分组成。前提就是推理所根据的已知命题，结论则是从前提出发通过推理而得到的新命题。   数理逻辑从形式结构上来研究推理的有效性  【定义 2.8】 设H1，H2，…，Hn和C都是命题公式，若H1∧H2∧…∧Hn&amp;#x3">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png">
+<meta property="article:published_time" content="2023-01-13T12:12:32.884Z">
+<meta property="article:modified_time" content="2023-01-13T12:38:31.516Z">
+<meta property="article:author" content="Bug Testing">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zyj1204.github.io/2023/01/13/cmath_5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2.3.自然推理系统',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-13 20:38:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/readPercent.css"><div id="myscoll"></div><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">柚子的技术岛</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">2.3.自然推理系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-13T12:12:32.884Z" title="Created 2023-01-13 20:12:32">2023-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-13T12:38:31.516Z" title="Updated 2023-01-13 20:38:31">2023-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">559</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>1min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="2.3.自然推理系统"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="2-3-自然推理系统"><a href="#2-3-自然推理系统" class="headerlink" title="2.3 自然推理系统"></a>2.3 自然推理系统</h1><h3 id="2-3-1-推理"><a href="#2-3-1-推理" class="headerlink" title="2.3.1 推理"></a>2.3.1 推理</h3><blockquote>
+<p>数理逻辑的主要任务是用逻辑的方法研究数学中的推理。</p>
+</blockquote>
+<blockquote>
+<p>所谓推理是指从前提出发，应用推理规则推出结论的思维过程</p>
+</blockquote>
+<blockquote>
+<p>任何一个推理都由前提和结论两部分组成。前提就是推理所根据的已知命题，结论则是从前提出发通过推理而得到的新命题。</p>
+</blockquote>
+<blockquote>
+<p>数理逻辑从形式结构上来研究推理的有效性</p>
+</blockquote>
+<h5 id="【定义-2-8】"><a href="#【定义-2-8】" class="headerlink" title="【定义 2.8】"></a>【定义 2.8】</h5><blockquote>
+<p>设H<sub>1</sub>，H<sub>2</sub>，…，H<sub>n</sub>和C都是命题公式，若H<sub>1</sub>∧H<sub>2</sub>∧…∧H<sub>n</sub>&#x3D;&gt;C，则称C为一组前提H<sub>1</sub>，H<sub>2</sub>，…，H<sub>n</sub>的有效结论或逻辑结论。也称由前提H<sub>1</sub>，H<sub>2</sub>，…，H<sub>n</sub>推出结论C的推理是有效的或正确的。</p>
+</blockquote>
+<blockquote>
+<p>H<sub>1</sub>∧H<sub>2</sub>∧…∧H<sub>n</sub>&#x3D;&gt;C，亦可记为H<sub>1</sub>∧H<sub>2</sub>∧…∧H<sub>n</sub>├ C</p>
+</blockquote>
+<h5 id="2-3-1-1-证明"><a href="#2-3-1-1-证明" class="headerlink" title="2.3.1.1 证明"></a>2.3.1.1 证明</h5><blockquote>
+<p>要证明C为一组前提H<sub>1</sub>，H<sub>2</sub>，…，H<sub>n</sub>的有效结论，只需证明H<sub>1</sub>∧H<sub>2</sub>∧…∧H<sub>n</sub>→C为重言式。</p>
+</blockquote>
+<p>​方法：</p>
+<blockquote>
+<ol>
+<li>真值表法</li>
+<li>等值演算法</li>
+<li>主析（合）取范式</li>
+<li>推理法</li>
+</ol>
+</blockquote>
+<h5 id="2-3-1-2-推理法"><a href="#2-3-1-2-推理法" class="headerlink" title="2.3.1.2 推理法"></a>2.3.1.2 推理法</h5><p>根据已知的等值公式和蕴涵式，利用推理规则证明。</p>
+<ul>
+<li><p>直接推理</p>
+<ul>
+<li><p>推理规则</p>
+<ol>
+<li><p>p规则（前提引入规则）</p>
+<p>​		前提在推导过程中的任何时候都可以引入使用。</p>
+</li>
+<li><p>T规则（结论引入规则）</p>
+<p>​		推理中，如果一个或多个公式，蕴含了公式S，则公式S可以引入到以后的推理之中。</p>
+</li>
+<li><p>转换规则</p>
+<p>​		在推导过程的任何步骤上，命题公式中的子公式都可以用与之等价的公式置换，此规则也可以记为T规则。</p>
+</li>
+</ol>
+</li>
+<li><p>常用的推理定律</p>
+<table>
+<thead>
+<tr>
+<th align="center">常用的推理定律</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">附加律</td>
+<td align="center">A├(A∨B)</td>
+</tr>
+<tr>
+<td align="center">化简律</td>
+<td align="center">(A∧B)├A 或 (A∧B)├B</td>
+</tr>
+<tr>
+<td align="center">假言推理*</td>
+<td align="center">((A→B)∧A)├B</td>
+</tr>
+<tr>
+<td align="center">拒取式*</td>
+<td align="center">((A→B)∧¬B)├¬A</td>
+</tr>
+<tr>
+<td align="center">条件（假言）三段论*</td>
+<td align="center">((A→B)∧(B→C))├(A→C)</td>
+</tr>
+<tr>
+<td align="center">析取三段论</td>
+<td align="center">((A∨B)∧¬B)├A 或 ((A∨B)∧¬A)├B</td>
+</tr>
+<tr>
+<td align="center">合取引入规则</td>
+<td align="center">A，B├(A∨B)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>间接推理</p>
+<ul>
+<li><p>归谬法（反证法）</p>
+<p>​	结论的否定作为新的规则引入， 寻找矛盾</p>
+</li>
+<li><p>CP规则</p>
+<blockquote>
+<p>将结论中的R作为条件引入</p>
+</blockquote>
+<p>若H<sub>1</sub>，H<sub>2</sub>，… ，H<sub>n</sub>，R├ C，则H<sub>1</sub>，H<sub>2</sub>，… ，H<sub>n</sub>├ R → C</p>
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://ZYJ1204.github.io">Bug Testing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zyj1204.github.io/2023/01/13/cmath_5/">https://zyj1204.github.io/2023/01/13/cmath_5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></div><div class="post_share"><div class="social-share" data-image="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/13/cmath_1/" title="1.1.基本概念"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">1.1.基本概念</div></div></a></div><div><a href="/2023/01/13/cmath_3/" title="2.1.范式"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">2.1.范式</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bug Testing</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZYJ1204"><i></i><span>🛴前往Github...</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><center>快速访问：<br><a target="_blank" rel="noopener" href="https://www.baidu.com"><b><font color="#5ea6e5">百度</font></b></a></center></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2-3-%E8%87%AA%E7%84%B6%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">2.3 自然推理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E6%8E%A8%E7%90%86"><span class="toc-number">1.0.1.</span> <span class="toc-text">2.3.1 推理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%90%E5%AE%9A%E4%B9%89-2-8%E3%80%91"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">【定义 2.8】</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-1-1-%E8%AF%81%E6%98%8E"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">2.3.1.1 证明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-1-2-%E6%8E%A8%E7%90%86%E6%B3%95"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">2.3.1.2 推理法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Bug Testing</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer src="/js/cursor.js"></script><script async src="/js/title.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script defer data-pjax src="/js/readPercent.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题使用Butterfly" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.js"></script><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.34532,23.15624';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>

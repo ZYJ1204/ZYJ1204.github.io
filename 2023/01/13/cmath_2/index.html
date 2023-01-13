@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>1.2.命题公示的等值演算 | 柚子的技术岛</title><meta name="author" content="Bug Testing"><meta name="copyright" content="Bug Testing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.2.1 命题公式&#x2F;真值表1.2.1.1 命题公式概念&#x2F;真值表 按以下规则构成的符号串称为命题演算的合式公式，也称为命题公式，简称公式。  单个命题变元和常元是合式公式，并称为**原子命题公式**。  如果A是合式公式，则（¬A）是合式公式。  若A、B是合式公式，则（A∧B），（A∨B），（A→B），（A↔B）是合式公式。  有限次地应用1~3形成的符号串是合式公式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.2.命题公示的等值演算">
+<meta property="og:url" content="https://zyj1204.github.io/2023/01/13/cmath_2/index.html">
+<meta property="og:site_name" content="柚子的技术岛">
+<meta property="og:description" content="1.2.1 命题公式&#x2F;真值表1.2.1.1 命题公式概念&#x2F;真值表 按以下规则构成的符号串称为命题演算的合式公式，也称为命题公式，简称公式。  单个命题变元和常元是合式公式，并称为**原子命题公式**。  如果A是合式公式，则（¬A）是合式公式。  若A、B是合式公式，则（A∧B），（A∨B），（A→B），（A↔B）是合式公式。  有限次地应用1~3形成的符号串是合式公式。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png">
+<meta property="article:published_time" content="2023-01-13T12:07:55.496Z">
+<meta property="article:modified_time" content="2023-01-13T12:38:22.339Z">
+<meta property="article:author" content="Bug Testing">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zyj1204.github.io/2023/01/13/cmath_2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '1.2.命题公示的等值演算',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-13 20:38:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/readPercent.css"><div id="myscoll"></div><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">柚子的技术岛</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">1.2.命题公示的等值演算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-13T12:07:55.496Z" title="Created 2023-01-13 20:07:55">2023-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-13T12:38:22.339Z" title="Updated 2023-01-13 20:38:22">2023-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>4min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="1.2.命题公示的等值演算"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-2-1-命题公式-x2F-真值表"><a href="#1-2-1-命题公式-x2F-真值表" class="headerlink" title="1.2.1 命题公式&#x2F;真值表"></a>1.2.1 命题公式&#x2F;真值表</h1><h3 id="1-2-1-1-命题公式概念-x2F-真值表"><a href="#1-2-1-1-命题公式概念-x2F-真值表" class="headerlink" title="1.2.1.1 命题公式概念&#x2F;真值表"></a>1.2.1.1 命题公式概念&#x2F;真值表</h3><blockquote>
+<p>按以下规则构成的符号串称为命题演算的合式公式，也称为命题公式，简称公式。</p>
+<ol>
+<li><p>单个命题变元和常元是合式公式，并称为**<u>原子命题公式</u>**。</p>
+</li>
+<li><p>如果A是合式公式，则（¬A）是合式公式。</p>
+</li>
+<li><p>若A、B是合式公式，则（A∧B），（A∨B），（A→B），（A↔B）是合式公式。</p>
+</li>
+<li><p>有限次地应用1~3形成的符号串是合式公式。</p>
+</li>
+</ol>
+<p>合式公式也称为命题公式或命题形式，简称为公式。</p>
+</blockquote>
+<h3 id="1-2-1-2-联结词优先次序"><a href="#1-2-1-2-联结词优先次序" class="headerlink" title="1.2.1.2 联结词优先次序"></a>1.2.1.2 联结词优先次序</h3><blockquote>
+<p> <strong><u>¬，∧，∨，→，↔</u></strong></p>
+</blockquote>
+<h3 id="1-2-1-3-子公式（公式分量）"><a href="#1-2-1-3-子公式（公式分量）" class="headerlink" title="1.2.1.3 子公式（公式分量）"></a>1.2.1.3 子公式（公式分量）</h3><blockquote>
+<p>设A<sub>i</sub>是公式A的一部分，且A<sub>i</sub>是一个合式公式，称A<sub>i</sub>是A的子公式，或公式分量</p>
+</blockquote>
+<h3 id="1-2-1-4-成真（成假）指派"><a href="#1-2-1-4-成真（成假）指派" class="headerlink" title="1.2.1.4 成真（成假）指派"></a>1.2.1.4 成真（成假）指派</h3><blockquote>
+<p>设A为一命题公式，P<sub>1</sub>，P<sub>2</sub>，…，P<sub>n</sub>为出现在A中的所有命题变元，对P<sub>1</sub>，P<sub>2</sub>，…，P<sub>n</sub>各指定一个真值称为对A的一种指派或赋值。若指定的一种指派使A的值为真，则称这组值为A的成真指派；若指定的一种指派使A的值为假，则称这组值为A的成假指派。</p>
+<p><strong>含n个命题变元的命题公式，共有2<sup>n</sup>组指派。</strong></p>
+</blockquote>
+<h3 id="1-2-1-5-真值表"><a href="#1-2-1-5-真值表" class="headerlink" title="1.2.1.5 真值表"></a>1.2.1.5 真值表</h3><blockquote>
+<p>将命题公式A在所有指派下的取值情况列成表，称为A的真值表。</p>
+</blockquote>
+<h1 id="1-2-2-命题公式的等值演算"><a href="#1-2-2-命题公式的等值演算" class="headerlink" title="1.2.2 命题公式的等值演算"></a>1.2.2 命题公式的等值演算</h1><h3 id="1-2-2-1-等值（等价）概念"><a href="#1-2-2-1-等值（等价）概念" class="headerlink" title="1.2.2.1 等值（等价）概念"></a>1.2.2.1 等值（等价）概念</h3><blockquote>
+<p>设A和B是两个命题公式，设P<sub>1</sub>，P<sub>2</sub>，…，P<sub>n</sub>为所有出现于A和B中的原子变元，若给定P<sub>1</sub>，P<sub>2</sub>，…，P<sub>n</sub><u><strong>任一组真值指派，A和B的真值都相同</strong></u>，则称A和B是等值的或等价的，记作A⇔B</p>
+</blockquote>
+<h3 id="1-2-2-2永真（假）式和可满足式"><a href="#1-2-2-2永真（假）式和可满足式" class="headerlink" title="1.2.2.2永真（假）式和可满足式"></a>1.2.2.2永真（假）式和可满足式</h3><blockquote>
+<p>设A为一命题公式，若A在它的各种指派情况下，其取值均为真（假），则成公式A为永真式（永假式）或重言式（矛盾式）。</p>
+<p>设A为一命题公式，若A在它的各种指派情况下至少存在一组成真指派，则称A是可满足式。若可满足式A至少存在一个成假赋值，则称A为非重言式的可满足式。</p>
+</blockquote>
+<ul>
+<li>合式公式P是可满足式，等价于P至少存在一个成真赋值；</li>
+<li>重言式一定是可满足式，但可满足式不一定是重言式；</li>
+<li>若两个命题公式P和Q等价，则P→Q是重言式。</li>
+</ul>
+<h3 id="1-2-2-3-证明两个命题公式等价的方法："><a href="#1-2-2-3-证明两个命题公式等价的方法：" class="headerlink" title="1.2.2.3 证明两个命题公式等价的方法："></a>1.2.2.3 证明两个命题公式等价的方法：</h3><h4 id="1-2-2-3-1-真值表法"><a href="#1-2-2-3-1-真值表法" class="headerlink" title="1.2.2.3.1 真值表法"></a>1.2.2.3.1 真值表法</h4><blockquote>
+<p>【证明题】根据等价的定义，用真值表证明<br>   p→q ⇔ ¬p∨q</p>
+<table>
+<thead>
+<tr>
+<th align="center">p</th>
+<th align="center">q</th>
+<th align="center">p→q</th>
+<th align="center">¬p∨q</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">T</td>
+<td align="center">T</td>
+<td align="center">T</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">T</td>
+<td align="center">F</td>
+<td align="center">F</td>
+<td align="center">F</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">T</td>
+<td align="center">T</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">F</td>
+<td align="center">T</td>
+<td align="center">T</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h4 id="1-2-2-3-2-等值演算法"><a href="#1-2-2-3-2-等值演算法" class="headerlink" title="1.2.2.3.2 等值演算法"></a>1.2.2.3.2 等值演算法</h4><blockquote>
+<p>先用真值表证明一组基本等价式，以它们为基础进行公式之间的演算。基本等价式常叫命题定律。已知成立定律：</p>
+<table>
+<thead>
+<tr>
+<th align="center">已知成立定律</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1. 双重否定律</td>
+<td align="center">A⇔ ¬¬A</td>
+</tr>
+<tr>
+<td align="center">2. 交换律</td>
+<td align="center">A∨B⇔B∨A<br/>A∧B⇔B∧A</td>
+</tr>
+<tr>
+<td align="center">3. 结合律</td>
+<td align="center">(A∨B)∨C⇔A∨(B∨C)<br/>(A∧B)∧C⇔A∧(B∧C)</td>
+</tr>
+<tr>
+<td align="center">4. 分配律<font color=#ff0000>*</font></td>
+<td align="center">A∧(B∨C)⇔(A∧B)∨(A∧C)<br/>A∨(B∧C)⇔(A∨B)∧(A∨C)</td>
+</tr>
+<tr>
+<td align="center">5. 德摩根律<font color=#ff0000>*</font></td>
+<td align="center">¬(A∨B)⇔¬A∧¬B<br/>¬(A∧B)⇔¬A∨¬B</td>
+</tr>
+<tr>
+<td align="center">6. 幂等律</td>
+<td align="center">A∧A ⇔ A，A∨A ⇔ A</td>
+</tr>
+<tr>
+<td align="center">7. 吸收律</td>
+<td align="center">A∨(A∧B) ⇔ A <br/>A∧(A∨B) ⇔ A</td>
+</tr>
+<tr>
+<td align="center">8. 零律</td>
+<td align="center">A∨1⇔1 <br/>A∧0⇔0</td>
+</tr>
+<tr>
+<td align="center">9. 同一律</td>
+<td align="center">A∨0⇔A <br/>A∧1⇔A</td>
+</tr>
+<tr>
+<td align="center">10. 排中律</td>
+<td align="center">A∨¬A⇔1</td>
+</tr>
+<tr>
+<td align="center">11. 否定律（矛盾律）</td>
+<td align="center">A∧¬A⇔0</td>
+</tr>
+<tr>
+<td align="center">12. 蕴涵等值式（条件等价式）<font color=#ff0000>*</font></td>
+<td align="center">A→B⇔¬A∨B</td>
+</tr>
+<tr>
+<td align="center">13. 双条件等价式(充要)（等价等值式）</td>
+<td align="center">A↔B⇔(A→B)∧(B→A)</td>
+</tr>
+<tr>
+<td align="center">14. 假言易位式(逆否)</td>
+<td align="center">A→B⇔¬B→¬A</td>
+</tr>
+<tr>
+<td align="center">15. 双条件否定等价式（等价否定等值式）</td>
+<td align="center">A↔B⇔¬ A↔¬B</td>
+</tr>
+<tr>
+<td align="center">16. 归谬论</td>
+<td align="center">(A→B)∧(A→¬B)⇔¬A</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="1-2-2-4-等值演算与蕴涵式"><a href="#1-2-2-4-等值演算与蕴涵式" class="headerlink" title="1.2.2.4 等值演算与蕴涵式"></a>1.2.2.4 等值演算与蕴涵式</h3><ul>
+<li>【定理1】等价置换</li>
+</ul>
+<blockquote>
+<p>设Φ(A)是含有子公式A的命题公式，使用子公式B置换Φ(A)中A的所有出现，得到公式Φ(B)，若A⇔B，则Φ(A)⇔Φ(B)。满足此定理的置换叫做等价置换。</p>
+</blockquote>
+<ul>
+<li>【定理2】</li>
+</ul>
+<blockquote>
+<p>设A、B为两个命题公式，A⇔B，当且仅当A↔B为一个重言式。</p>
+</blockquote>
+<ul>
+<li>蕴涵式（永真条件式）</li>
+</ul>
+<blockquote>
+<p>当且仅当P↔Q是一个重言式时，我们称“P蕴涵Q”，并记作P&#x3D;&gt;Q</p>
+</blockquote>
+<h3 id="1-2-2-5-联结词完备集"><a href="#1-2-2-5-联结词完备集" class="headerlink" title="1.2.2.5 联结词完备集"></a>1.2.2.5 联结词完备集</h3><blockquote>
+<p>设S是一个联结词集合，如果任何n（n&gt;&#x3D;1）元真值函数都可以有仅含S中的联结词构成的公式表示，则称S是联结词完备集。</p>
+</blockquote>
+<ul>
+<li><p>最小完备集</p>
+<blockquote>
+<p>{¬, ∨}、{¬, ∧}</p>
+</blockquote>
+</li>
+<li><p>与非门、或非门</p>
+<blockquote>
+<p>设P、Q为两个命题，P与Q的否定式是一个复合命题，称作P与Q的与非式，记作P↑Q，即P↑Q⇔¬（P∧Q）。符号↑称为与非联结词。</p>
+<p>设P、Q为两个命题，P或Q的否定式是一个复合命题，称作P与Q的或非式，记作P↓Q，即P↓Q⇔¬（P∨Q）。符号↓称为或非联结词。</p>
+</blockquote>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://ZYJ1204.github.io">Bug Testing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zyj1204.github.io/2023/01/13/cmath_2/">https://zyj1204.github.io/2023/01/13/cmath_2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></div><div class="post_share"><div class="social-share" data-image="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/13/cmath_1/" title="1.1.基本概念"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">1.1.基本概念</div></div></a></div><div><a href="/2023/01/13/cmath_5/" title="2.3.自然推理系统"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">2.3.自然推理系统</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bug Testing</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZYJ1204"><i></i><span>🛴前往Github...</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><center>快速访问：<br><a target="_blank" rel="noopener" href="https://www.baidu.com"><b><font color="#5ea6e5">百度</font></b></a></center></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-2-1-%E5%91%BD%E9%A2%98%E5%85%AC%E5%BC%8F-x2F-%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">1.2.1 命题公式&#x2F;真值表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-1-%E5%91%BD%E9%A2%98%E5%85%AC%E5%BC%8F%E6%A6%82%E5%BF%B5-x2F-%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.2.1.1 命题公式概念&#x2F;真值表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-2-%E8%81%94%E7%BB%93%E8%AF%8D%E4%BC%98%E5%85%88%E6%AC%A1%E5%BA%8F"><span class="toc-number">1.0.2.</span> <span class="toc-text">1.2.1.2 联结词优先次序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-3-%E5%AD%90%E5%85%AC%E5%BC%8F%EF%BC%88%E5%85%AC%E5%BC%8F%E5%88%86%E9%87%8F%EF%BC%89"><span class="toc-number">1.0.3.</span> <span class="toc-text">1.2.1.3 子公式（公式分量）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-4-%E6%88%90%E7%9C%9F%EF%BC%88%E6%88%90%E5%81%87%EF%BC%89%E6%8C%87%E6%B4%BE"><span class="toc-number">1.0.4.</span> <span class="toc-text">1.2.1.4 成真（成假）指派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-5-%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="toc-number">1.0.5.</span> <span class="toc-text">1.2.1.5 真值表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-2-2-%E5%91%BD%E9%A2%98%E5%85%AC%E5%BC%8F%E7%9A%84%E7%AD%89%E5%80%BC%E6%BC%94%E7%AE%97"><span class="toc-number">2.</span> <span class="toc-text">1.2.2 命题公式的等值演算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-1-%E7%AD%89%E5%80%BC%EF%BC%88%E7%AD%89%E4%BB%B7%EF%BC%89%E6%A6%82%E5%BF%B5"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.2.2.1 等值（等价）概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-2%E6%B0%B8%E7%9C%9F%EF%BC%88%E5%81%87%EF%BC%89%E5%BC%8F%E5%92%8C%E5%8F%AF%E6%BB%A1%E8%B6%B3%E5%BC%8F"><span class="toc-number">2.0.2.</span> <span class="toc-text">1.2.2.2永真（假）式和可满足式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-3-%E8%AF%81%E6%98%8E%E4%B8%A4%E4%B8%AA%E5%91%BD%E9%A2%98%E5%85%AC%E5%BC%8F%E7%AD%89%E4%BB%B7%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">2.0.3.</span> <span class="toc-text">1.2.2.3 证明两个命题公式等价的方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-3-1-%E7%9C%9F%E5%80%BC%E8%A1%A8%E6%B3%95"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">1.2.2.3.1 真值表法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-3-2-%E7%AD%89%E5%80%BC%E6%BC%94%E7%AE%97%E6%B3%95"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">1.2.2.3.2 等值演算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-4-%E7%AD%89%E5%80%BC%E6%BC%94%E7%AE%97%E4%B8%8E%E8%95%B4%E6%B6%B5%E5%BC%8F"><span class="toc-number">2.0.4.</span> <span class="toc-text">1.2.2.4 等值演算与蕴涵式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-5-%E8%81%94%E7%BB%93%E8%AF%8D%E5%AE%8C%E5%A4%87%E9%9B%86"><span class="toc-number">2.0.5.</span> <span class="toc-text">1.2.2.5 联结词完备集</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Bug Testing</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer src="/js/cursor.js"></script><script async src="/js/title.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script defer data-pjax src="/js/readPercent.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题使用Butterfly" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.js"></script><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.34532,23.15624';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>
