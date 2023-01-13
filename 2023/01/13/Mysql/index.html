@@ -1,0 +1,687 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Mysql教程 | 柚子的技术岛</title><meta name="author" content="Bug Testing"><meta name="copyright" content="Bug Testing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MySQL学习笔记 一. MySQL简介 1.1 MySQL基础 sql分类：  DDL（Data Definition Language）数据定义语言，用来定义数据库对象：数据库，表，列等。create，drop，alter等。 DML(Data Manipulation Language)数据操作语言用来对数据库中表的数据进行增删改。insert, delete, update 等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql教程">
+<meta property="og:url" content="https://zyj1204.github.io/2023/01/13/Mysql/index.html">
+<meta property="og:site_name" content="柚子的技术岛">
+<meta property="og:description" content="MySQL学习笔记 一. MySQL简介 1.1 MySQL基础 sql分类：  DDL（Data Definition Language）数据定义语言，用来定义数据库对象：数据库，表，列等。create，drop，alter等。 DML(Data Manipulation Language)数据操作语言用来对数据库中表的数据进行增删改。insert, delete, update 等">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a380f8076cac2a55fb14665bb5cc5c17.png">
+<meta property="article:published_time" content="2023-01-13T14:05:12.525Z">
+<meta property="article:modified_time" content="2023-01-13T14:14:58.143Z">
+<meta property="article:author" content="Bug Testing">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/a380f8076cac2a55fb14665bb5cc5c17.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zyj1204.github.io/2023/01/13/Mysql/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Mysql教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-13 22:14:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/readPercent.css"><div id="myscoll"></div><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img-blog.csdnimg.cn/img_convert/a380f8076cac2a55fb14665bb5cc5c17.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">柚子的技术岛</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Mysql教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-13T14:05:12.525Z" title="Created 2023-01-13 22:05:12">2023-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-13T14:14:58.143Z" title="Updated 2023-01-13 22:14:58">2023-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">6.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>23min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Mysql教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="mysql学习笔记">MySQL学习笔记</h1>
+<h2 id="一.-mysql简介">一. MySQL简介</h2>
+<h3 id="mysql基础">1.1 MySQL基础</h3>
+<p><strong>sql分类</strong>：</p>
+<ol type="1">
+<li>DDL（Data Definition Language）数据定义语言，用来定义数据库对象：数据库，表，列等。create，drop，alter等。</li>
+<li>DML(Data Manipulation Language)数据操作语言用来对数据库中表的数据进行增删改。insert, delete, update 等。</li>
+<li>DQL(Data Query Language)数据查询语言用来查询数据库中表的记录(数据)。select, where 等。</li>
+<li>DCL(Data Control Language)数据控制语言(了解)用来定义数据库的访问权限和安全级别，及创建用户。grant，revoke 等。</li>
+</ol>
+<p><strong>mysql基本操作：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">启动mysql服务:</span><br><span class="line">net <span class="keyword">start</span> mysql</span><br><span class="line">连接<span class="keyword">sql</span>服务</span><br><span class="line">mysql <span class="operator">-</span>h 地址 <span class="operator">-</span>p 端口 <span class="operator">-</span>u 用户名 <span class="operator">-</span>p 密码</span><br><span class="line">Enter password:<span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span></span><br><span class="line">退出：</span><br><span class="line">mysql<span class="operator">&gt;</span>exit</span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
+<p><strong>mysql建表规范</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/* 建表规范 */ ------------------</span><br><span class="line">    -- Normal Format, NF</span><br><span class="line">        - 每个表保存一个实体信息</span><br><span class="line">        - 每个具有一个ID字段作为主键</span><br><span class="line">        - ID主键 + 原子表</span><br><span class="line">    -- 1NF, 第一范式</span><br><span class="line">        字段不能再分，就满足第一范式。通俗理解即一个字段只存储一项信息。</span><br><span class="line">    -- 2NF, 第二范式</span><br><span class="line">        满足第一范式的前提下，不能出现部分依赖。</span><br><span class="line">        消除复合主键就可以避免部分依赖。增加单列关键字。</span><br><span class="line">        第二范式（2NF）要求数据库表中的每个实例或行必须可以被惟一地区分。为实现区分通常需要我们设计一个主键来实现(这里的主键不包含业务逻辑)。</span><br><span class="line">    -- 3NF, 第三范式</span><br><span class="line">        满足第二范式的前提下，不能出现传递依赖。</span><br><span class="line">        某个字段依赖于主键，而有其他字段依赖于该字段。这就是传递依赖。</span><br><span class="line">        将一个实体信息的数据放在一个表内实现。</span><br><span class="line">        简而言之，第三范式（3NF）要求一个数据库表中不包含已在其它表中已包含的非主键字段。就是说，表的信息，如果能够被推导出来，就不应该单独的设计一个字段来存放(能尽量外键join就用外键join)。很多时候，我们为了满足第三范式往往会把一张表分成多张表。</span><br></pre></td></tr></table></figure>
+<h3 id="mysql架构演变">1.2 mysql架构演变</h3>
+<p><strong>单机单库</strong></p>
+<p>小型网站，只需一个mysql就能满足数据读取和写入需求。</p>
+<p>瓶颈：</p>
+<ul>
+<li>数据量不能太大，超出一台服务器承受</li>
+<li>读写操作量不能太大，超出一台服务器承受</li>
+<li>可用性差</li>
+</ul>
+<p><strong>主从架构</strong></p>
+<p>主要解决单机单库下的高可用和读扩展问题，主库宕机可以通过主从切换保障高可用。mysql也可以通过主从结构完成读写分离即主库用来写，从库用来读。</p>
+<p>瓶颈：</p>
+<ul>
+<li>数据量不能过大，超出一台服务器承受</li>
+<li>写操作不能太大，超出一台服务器承受</li>
+</ul>
+<p><strong>分库分表</strong></p>
+<p>对于存储和写瓶颈，可以通过水平拆分来解决，水平和垂直拆分有较大区别，垂直拆分的结果是每一个实例都有全部数据，而水平拆分之后，任何实例都只有全量的1/n。</p>
+<h3 id="mysql架构">1.3 mysql架构</h3>
+<figure>
+<img src="https://camo.githubusercontent.com/2731b6c6c4b5c52b896aea5ab86107b829d0c571523c4552abf3e48ab664883c/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f706963676f2f696d6167652d32303231313033303135323233393030372e706e67" alt="image-20211030152239007" /><figcaption>image-20211030152239007</figcaption>
+</figure>
+<p>MySQL Server架构自顶向下大致可以分网络连接层、服务层、存储引擎层和系统文件层。</p>
+<ol type="1">
+<li><p>网络连接层</p>
+<p>客户端连接器（Client Connectors）：提供与MySQL服务器建立的支持。目前几乎支持所有主流的服务端编程技术，例如常见的 Java、C、Python、.NET等，它们通过各自API技术与MySQL建立连接</p></li>
+<li><p>服务层</p>
+<p>服务层是MySQL Server的核心，主要包含系统管理和控制工具、连接池、SQL接口、解析器、查询优化器和缓存六个部分。</p>
+<ol type="1">
+<li><p>连接池：负责存储和管理客户端与数据库的连接，一个线程负责管理一个连接</p></li>
+<li><p>系统管理和控制工具：例如备份恢复、安全管理、集群管理</p></li>
+<li><p>SQL接口：用于接收客户端发送的各种SQL命令，并且返回用户需要查询的结果。比如DML、DDL、存储过程、视图、触发器等</p></li>
+<li><p>解析器：负责将请求的SQL解析生成一个&quot;解析树&quot;。然后根据一些MySQL规则进一步检查解析树是否合法。</p></li>
+<li><p>查询优化器:</p>
+<p>当“解析树”通过解析器语法检查后，将交由优化器将其转化成执行计划，然后与存储引擎交互</p></li>
+<li><p>缓存:</p>
+<p>缓存机制是由一系列小缓存组成的。比如表缓存，记录缓存，权限缓存，引擎缓存等。如果查询缓存有命中的查询结果，查询语句就可以直接去查询缓存中取数据</p></li>
+</ol></li>
+<li><p>存储引擎层</p>
+<p>存储引擎负责MySQL中数据的存储与提取，与底层系统文件进行交互。MySQL存储引擎是插件式的，服务器中的查询执行引擎通过接口与存储引擎进行通信，接口屏蔽了不同存储引擎之间的差异 。现在有很多种存储引擎，各有各的特点，最常见的是MyISAM和InnoDB</p></li>
+<li><p>系统文件层</p>
+<p>该层负责将数据库的数据和日志存储在文件系统之上，并完成与存储引擎的交互，是文件的物理存储层。主要包含日志文件，数据文件，配置文件，pid 文件，socket 文件等</p></li>
+</ol>
+<h3 id="mysql运行机制">1.4 mysql运行机制</h3>
+<figure>
+<img src="https://camo.githubusercontent.com/667ffd7311a02d3ce64fa6761d0999368b6ccdb97ac8b8168f91da4aad2d22c8/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f706963676f2f6d7973716c2545362542352538312545372541382538422e706e67" alt="mysql流程" /><figcaption>mysql流程</figcaption>
+</figure>
+<p>建立连接（Connectors&amp;Connection Pool），通过客户端/服务器通信协议与MySQL建立连接。MySQL 客户端与服务端的通信方式是 “ 半双工 ”。对于每一个 MySQL 的连接，时刻都有一个线程状态来标识这个连接正在做什么</p>
+<p>查询缓存（Cache&amp;Buffer）,这是Mysql一个可优化查询的地方，开启了查询缓存且在查询缓存过程中查询到完全相同的sql语句，则直接将查询结果返回给客户端，如果没有开启或没有查询到完全相同的sql语句则由解析器进行语法解析，并生成解析树。</p>
+<p>解析器，将客户端发送的SQL进行语法解析，生成&quot;解析树&quot;。预处理器根据一些MySQL规则进一步检查“解析树”是否合法，例如这里将检查数据表和数据列是否存在，还会解析名字和别名，看看它们是否有歧义，最后生成新的“解析树</p>
+<p>查询优化器：根据“解析树”生成最优的执行计划。MySQL使用很多优化策略生成最优的执行计划，可以分为两类：静态优化（编译时优化）、动态优化（运行时优化）</p>
+<ul>
+<li>等价变化策略
+<ul>
+<li><code>5=5 and a&gt;5</code>改成<code>a&gt;5</code></li>
+<li><code>a&lt;b and a=5</code>改成<code>b&gt;5 and a=5</code></li>
+<li>基于联合索引调整条件位置</li>
+</ul></li>
+<li>优化count、min、max函数</li>
+<li>提前终止查询
+<ul>
+<li>使用limit，则获取所需的数据，不在遍历后面的数据</li>
+</ul></li>
+</ul>
+<p>查询执行引擎，负责执行 SQL 语句，此时查询执行引擎会根据 SQL 语句中表的存储引擎类型，以及对应的API接口与底层存储引擎缓存或者物理文件的交互，得到查询结果并返回给客户端。若开启用查询缓存，这时会将SQL 语句和结果完整地保存到查询缓存（Cache&amp;Buffffer）中，以后若有相同的 SQL 语句执行则直接返回结果。</p>
+<h2 id="二.-mysql-ddl">二. MySQL-DDL</h2>
+<h3 id="数据库"><strong>数据库：</strong></h3>
+<p>查看所有数据库</p>
+<blockquote>
+<p>SHOW DATABASES;</p>
+</blockquote>
+<p>选择数据库</p>
+<blockquote>
+<p>USE xxx（数据库名）</p>
+</blockquote>
+<p><img src="https://camo.githubusercontent.com/089a4728666775c18478358ee48d55a16cdfe19eaa4fd8fbd125f4277a2a1e9e/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f6a6176615f646174612f6d7973716c64646c312e6a7067" /></p>
+<p>查看当前数据库：</p>
+<blockquote>
+<p>SELECT DATABASE();</p>
+</blockquote>
+<p>查看当前时间、用户名、数据库版本</p>
+<blockquote>
+<p>SELECT now(); SELECT user(); SELECT version();</p>
+</blockquote>
+<p>创建数据库</p>
+<blockquote>
+<p>create database 数据库名;</p>
+<p>create database if not exists 数据库名称;</p>
+<p>create database 数据库名 character set 字符集名;</p>
+</blockquote>
+<p>修改数据库</p>
+<blockquote>
+<p>修改数据库编码</p>
+<p>alter database 数据库名称 character set 字符集;</p>
+</blockquote>
+<p>删除数据库</p>
+<blockquote>
+<p>drop database 数据库名称;</p>
+<p>drop database if exists 数据库名称;</p>
+</blockquote>
+<h3 id="表"><strong>表：</strong></h3>
+<p>创建表</p>
+<blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> [TEMPORARY] <span class="keyword">TABLE</span> [IF <span class="keyword">NOT</span> EXITS] [库名.]表名 （表的结构定义）[表选项]</span><br><span class="line"></span><br><span class="line">每个字段必须有数据类型</span><br><span class="line">最后一个字段不能有逗号</span><br><span class="line">TEMPORARY 临时表，会话结束时表自动消失</span><br><span class="line">对字段的定义：</span><br><span class="line">字段名 数据类型 [<span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span>] [<span class="keyword">DEFAULT</span> default_value] [AUTO_INCREMENT] [<span class="keyword">UNIQUE</span> [KEY] <span class="operator">|</span> [<span class="keyword">PRIMARY</span>] KEY] [COMMENT <span class="string">&#x27;备注&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>表选项有：</p>
+<ul>
+<li>ENGINE= engine_name (引擎名，常用引擎InnoDB、MyISAM)</li>
+<li>CHARSET = charset_name(字符集，未设置使用数据库字符集)</li>
+<li>AUTO_INCREMENT = 行数</li>
+<li>COMMENT = ‘表注释’</li>
+<li>DATA DIRECTORY ='数据文件目录'</li>
+<li>INDEX DIRECTORY ='索引文件目录'</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tb_ad` (</span><br><span class="line">`id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">`name` <span class="type">varchar</span>(<span class="number">50</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;广告名称&#x27;</span>,</span><br><span class="line">`position` <span class="type">varchar</span>(<span class="number">50</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;广告位置&#x27;</span>,</span><br><span class="line">`start_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;开始时间&#x27;</span>,</span><br><span class="line">`end_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;到期时间&#x27;</span>,</span><br><span class="line">`status` <span class="type">char</span>(<span class="number">1</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;状态&#x27;</span>,</span><br><span class="line">`image` <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;图片地址&#x27;</span>,</span><br><span class="line">`url` <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;URL&#x27;</span>,</span><br><span class="line">`remarks` <span class="type">varchar</span>(<span class="number">1000</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;备注&#x27;</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB AUTO_INCREMENT<span class="operator">=</span><span class="number">4</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>删除表</p>
+<blockquote>
+<p>drop table customer;</p>
+</blockquote>
+<p>修改表</p>
+<blockquote>
+<p>重命名：</p>
+<p>RENAME TABLE 原表名 TO 新表名</p>
+<p>添加单列：</p>
+<p>alter table 表名 add 列名 字段类型 AFTER 字段名/FIRST;（在xx字段后加入或在第一个加入）</p>
+<p>添加多列：</p>
+<p>alter table 表名 add 列名1 字段类型1,add 列名2 字段类型2...</p>
+<p>例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> customer <span class="keyword">add</span> name <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>查看当前数据库中的所有表</p>
+<blockquote>
+<p>SHOW TABLES;</p>
+</blockquote>
+<p>查看指定表的结构(建表语句)</p>
+<blockquote>
+<p>SHOW CREATE TABLE 指定表;</p>
+</blockquote>
+<p><img src="https://camo.githubusercontent.com/23dbe75af575aee08cd24a867c9e299eafc84cb9221ded3de4541eb4c74e1dcb/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f6a6176615f646174612f6d7973716c64646c322e6a7067" /></p>
+<p>查看指定表的结构</p>
+<blockquote>
+<p>DESC 表名;</p>
+</blockquote>
+<p><img src="https://camo.githubusercontent.com/174cbaecd42179c703cf197a28e802615e75ce49de67e07323c180b4acbe9059/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f6a6176615f646174612f6d7973716c64646c332e6a7067" /></p>
+<p>复制表结构</p>
+<blockquote>
+<p>CREATE TABLE 表名 LIKE 要复制的表名</p>
+<p>复制表结构和数据</p>
+<p>CREATE TABLE 表名 LIKE 要复制的表名 AS SELECT * FROM 要复制的表名</p>
+</blockquote>
+<p>修改列</p>
+<blockquote>
+<p>修改类型和列名</p>
+<p>ALTER TABLE 表名 CHANGE 原列名 新列名 新类型;</p>
+<p>只修改类型 不修改列名</p>
+<p>ALTER TABLE 表名 MODIFY 原列名 新类型;</p>
+</blockquote>
+<p>修改表名称</p>
+<blockquote>
+<p>alter table 表名 rename 新表名;</p>
+</blockquote>
+<p>删除列</p>
+<blockquote>
+<p>alter table 表名 drop 列名;</p>
+</blockquote>
+<h2 id="三.-mysql-dml">三. MySQL-DML</h2>
+<h3 id="增加数据">增加数据</h3>
+<blockquote>
+<p>insert into 表名（列名1，列名2，。。。列名n）values（值1，值2，。。。值n）</p>
+<p>insert into 表名 set 字段名=值</p>
+<p>列名和值要一一对应。如果表名后，不定义列名，则默认给所有列添加值insert into 表名 values(值1,值2,...值n)。除了数字类型，其他类型需要使用引号(单双都可以)引起来。</p>
+<p>例子：INSERT INTO usertable (id,username,sex) VALUES (5,'da','男')</p>
+<p>INSERT INTO usertable SET id=99,username='dadda'</p>
+</blockquote>
+<h3 id="删除数据">删除数据</h3>
+<blockquote>
+<p>delete from 表名 条件</p>
+<p>若没有条件则全部删除</p>
+<p>例子：</p>
+<p>DELETE FROM usertable WHERE id=99</p>
+</blockquote>
+<h3 id="修改数据">修改数据</h3>
+<blockquote>
+<p>UPDATE 表名 SET 字段名=新值[, 字段名=新值] [更新条件]</p>
+<p>例子：</p>
+<p>UPDATE usertable SET username='daxiao',sex='女' WHERE id=1</p>
+</blockquote>
+<h2 id="四.-mysql-dql">四. MySQL-DQL</h2>
+<h3 id="select">select</h3>
+<p>SELECT [ALL|DISTINCT] select_expr FROM-&gt; WHERE -&gt;GROUP BY [合计函数] -&gt;HAVING -&gt;ORDER BY -&gt;LIMIT</p>
+<ol type="1">
+<li>select_expr
+<ul>
+<li>可以使用 * 表示所有字段：select * from tb;</li>
+<li>可以使用表达式（计算公式、函数调用、字段也是表达式）：select stu, 25+35, now() from tb</li>
+<li>可以为每列使用别名，可以使用或省略as：select stu+10 as add10 from tb</li>
+</ul></li>
+<li>form
+<ul>
+<li>可以为表起别名：select * from tb as t,tb1 as b;</li>
+<li>多个表横向叠加，数据形成笛卡尔积：select * from tb1,tb2</li>
+</ul></li>
+<li>where
+<ul>
+<li>表达式由运算符和运算数组成。</li>
+<li>运算数：字段、值、函数返回值</li>
+<li>运算符：=等于,&lt;&gt;不等于,&lt;=&gt; 安全等于可用于null比较，&lt;=小于等于,&gt;=大于等于,&gt;大于，&lt;小于，（not）between and （不在）在...之间, （not） in （不）在集合中，like 模糊匹配,is (not) null (不)为空。</li>
+</ul></li>
+<li>group by
+<ul>
+<li>group by 字段/别名 [排序方式]</li>
+<li>asc升序，desc降序</li>
+<li>以下合计函数需配合group by使用：
+<ul>
+<li>count 返回数目:count(*)、count(字段)</li>
+<li>sum：求和</li>
+<li>max：求最大值</li>
+<li>min：求最小值</li>
+<li>avg：求平均值</li>
+</ul></li>
+<li>例子：<code>select name,COUNT(*) from tb1 group by name</code></li>
+</ul></li>
+<li>having
+<ul>
+<li>与where功能用法相同，执行时机不同</li>
+<li>where是在开始时检测数据，对原数据进行过滤；having对筛选出来的结果进行过滤</li>
+<li>having必须是查询出来的；where必须是数据表存在的</li>
+<li>where不可以使用合计函数，having主要就是使用合计函数时使用的。</li>
+<li>例子：<code>select region,sum(population),sum()arer from tb group by region having sun(area)&gt;10000</code></li>
+</ul></li>
+<li>order by
+<ul>
+<li>排序 asc 升序，desc降序</li>
+<li>默认升序</li>
+</ul></li>
+<li>limit
+<ul>
+<li>对结果进行数量限制，索引从0开始</li>
+<li>用法：limit 起始位置，获取条数</li>
+<li>或者limit 获取条数 则直接从0开始</li>
+</ul></li>
+<li>distinct 去除重复记录</li>
+</ol>
+<h3 id="union">union</h3>
+<p>用于连接两个以上的 SELECT 语句的结果组合到一个结果集合中。</p>
+<p>select ... union [all|distinct] select ...</p>
+<p>默认distinct，建议对每一个select查询加上小括号</p>
+<p><strong>每个select查询的字段列表(数量、类型)应一致，因为结果中的字段名以第一条select语句为准。</strong></p>
+<p>例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> country <span class="keyword">from</span> websites</span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line"><span class="keyword">select</span> country <span class="keyword">from</span> apps</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> country;</span><br></pre></td></tr></table></figure>
+<p>查询websites表和apps表中所有不同的country</p>
+<h3 id="子查询">子查询</h3>
+<h4 id="form形式">form形式</h4>
+<p>把内层的查询结果供外层再次查询</p>
+<p>form后面是一个表，必须给子查询取别名</p>
+<p>form型需将结果生成临时表格，子查询返回一个表，<strong>表型子查询</strong></p>
+<p>eg：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb <span class="keyword">where</span> id<span class="operator">&gt;</span><span class="number">0</span>) <span class="keyword">as</span> t <span class="keyword">where</span> id<span class="operator">&gt;</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="where形式">where形式</h4>
+<p>把内层查询结果当作外层查询的比较条件</p>
+<p>返回的结果集是一个标量集合，一行一列，也就是一个标量值，<strong>标量子查询</strong></p>
+<blockquote>
+<p>从定义上讲，每个标量子查询也是一个行子查询和一个列子查询，反之则不是；每个行子查询和列子查询也是一个表子查询，反之也不是。</p>
+</blockquote>
+<p>不需要起别名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb <span class="keyword">where</span> money <span class="operator">=</span>(<span class="keyword">select</span> <span class="built_in">max</span>(money) <span class="keyword">from</span> tb); </span><br></pre></td></tr></table></figure>
+<p>子查询返回的结果是一列，<strong>列子查询</strong></p>
+<p>使用in、not in、exists、not exists条件</p>
+<p>eg：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">exists</span>(</span><br><span class="line">    <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb2 <span class="keyword">where</span> tb1.id <span class="operator">=</span> tb2.id</span><br><span class="line">);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 </span><br><span class="line"><span class="keyword">where</span> tb1.id <span class="keyword">in</span> (</span><br><span class="line">    <span class="keyword">select</span> id <span class="keyword">from</span> tb2</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>查询条件是一个行,<strong>行子查询</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 </span><br><span class="line"><span class="keyword">where</span> (id,gender) <span class="keyword">in</span> (</span><br><span class="line">    <span class="keyword">select</span> id,gender <span class="keyword">from</span> tb2</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="连接查询">连接查询</h3>
+<p>将多个表的字段进行连接，可以指定连接条件。三张图片来自菜鸟教程</p>
+<h4 id="内连接-inner-join">内连接 inner join</h4>
+<p>获取两个表中字段匹配关系的记录</p>
+<p>默认，可省略inner，连接结果不能出现空行，on表示连接条件，与where类似，using也可用于连接条件</p>
+<figure>
+<img src="https://www.runoob.com/wp-content/uploads/2014/03/img_innerjoin.gif" alt="img" /><figcaption>img</figcaption>
+</figure>
+<p>eg：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 a <span class="keyword">inner</span> <span class="keyword">join</span> tb2 b <span class="keyword">on</span> a.id<span class="operator">=</span>b.id</span><br><span class="line">等价于</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1,tb2 <span class="keyword">where</span> tb1.id <span class="operator">=</span>tb2.id</span><br><span class="line">改为<span class="keyword">using</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 <span class="keyword">as</span> a <span class="keyword">join</span> tb2 b <span class="keyword">using</span>(id)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>交叉连接，</p>
+<h4 id="外连接">外连接</h4>
+<p>如果数据不存在，也会出现在连接结果中。 -- 左外连接 left join 如果数据不存在，左表记录会出现，而右表为null填充</p>
+<figure>
+<img src="https://www.runoob.com/wp-content/uploads/2014/03/img_leftjoin.gif" alt="img" /><figcaption>img</figcaption>
+</figure>
+<p>-- 右外连接 right join 如果数据不存在，右表记录会出现，而左表为null填充</p>
+<figure>
+<img src="https://www.runoob.com/wp-content/uploads/2014/03/img_rightjoin.gif" alt="img" /><figcaption>img</figcaption>
+</figure>
+<p>eg：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">左外连接</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 a <span class="keyword">left</span> <span class="keyword">join</span> tb2 b <span class="keyword">on</span> a.id <span class="operator">=</span>b.id</span><br><span class="line">右外连接</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb1 a <span class="keyword">left</span> <span class="keyword">join</span> tb2 b <span class="keyword">on</span> a.id <span class="operator">=</span>b.id</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="truncate">truncate</h3>
+<p>用法：truncate [table] tb_name</p>
+<p>清空表中数据</p>
+<p>区别：</p>
+<p>1 truncate 是删除表再创建，delete 是逐条删除 2 truncate 重置auto_increment的值。而delete不会 3 当被用于带分区的表时，truncate 会保留分区</p>
+<h2 id="五mysql-对用户的操作">五、MySQL-对用户的操作</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">-- 刷新权限</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">-- 增加用户</span><br><span class="line">CREATE USER 用户名 IDENTIFIED BY [PASSWORD] 密码(字符串)</span><br><span class="line">	必须拥有mysql数据库的全局CREATE USER权限，或拥有INSERT权限。</span><br><span class="line">	用户名，注意引号：如 &#x27;user_name&#x27;@&#x27;192.168.1.1&#x27;可以用%代替ip地址表示全部ip</span><br><span class="line">-- 重命名用户</span><br><span class="line">RENAME USER old_user TO new_user</span><br><span class="line">-- 分配权限/添加用户</span><br><span class="line">GRANT 权限列表 ON 表名 TO 用户名 [IDENTIFIED BY [PASSWORD] &#x27;password&#x27;]</span><br><span class="line">     all privileges 表示所有权限</span><br><span class="line">     *.* 表示所有库的所有表</span><br><span class="line">     库名.表名 表示某库下面的某表</span><br><span class="line">    GRANT ALL PRIVILEGES ON `pms`.* TO &#x27;pms&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;pms0817&#x27;;</span><br><span class="line">-- 撤消权限</span><br><span class="line">REVOKE 权限列表 ON 表名 FROM 用户名</span><br><span class="line">REVOKE ALL PRIVILEGES, GRANT OPTION FROM 用户名   -- 撤销所有权限</span><br><span class="line">-- 查看权限</span><br><span class="line">SHOW GRANTS FOR 用户名 </span><br><span class="line">-- 权限列表</span><br><span class="line">ALL [PRIVILEGES]    -- 设置除GRANT OPTION之外的所有简单权限</span><br><span class="line">ALTER   -- 允许使用ALTER TABLE</span><br><span class="line">ALTER ROUTINE   -- 更改或取消已存储的子程序</span><br><span class="line">CREATE  -- 允许使用CREATE TABLE</span><br><span class="line">CREATE ROUTINE  -- 创建已存储的子程序</span><br><span class="line">CREATE TEMPORARY TABLES     -- 允许使用CREATE TEMPORARY TABLE</span><br><span class="line">CREATE USER     -- 允许使用CREATE USER, DROP USER, RENAME USER和REVOKE ALL PRIVILEGES。</span><br><span class="line">CREATE VIEW     -- 允许使用CREATE VIEW</span><br><span class="line">DELETE  -- 允许使用DELETE</span><br><span class="line">DROP    -- 允许使用DROP TABLE</span><br><span class="line">EXECUTE     -- 允许用户运行已存储的子程序</span><br><span class="line">FILE    -- 允许使用SELECT...INTO OUTFILE和LOAD DATA INFILE</span><br><span class="line">INDEX   -- 允许使用CREATE INDEX和DROP INDEX</span><br><span class="line">INSERT  -- 允许使用INSERT</span><br><span class="line">LOCK TABLES     -- 允许对您拥有SELECT权限的表使用LOCK TABLES</span><br><span class="line">PROCESS     -- 允许使用SHOW FULL PROCESSLIST</span><br><span class="line">REFERENCES  -- 未被实施</span><br><span class="line">RELOAD  -- 允许使用FLUSH</span><br><span class="line">REPLICATION CLIENT  -- 允许用户询问从属服务器或主服务器的地址</span><br><span class="line">REPLICATION SLAVE   -- 用于复制型从属服务器（从主服务器中读取二进制日志事件）</span><br><span class="line">SELECT  -- 允许使用SELECT</span><br><span class="line">SHOW DATABASES  -- 显示所有数据库</span><br><span class="line">SHOW VIEW   -- 允许使用SHOW CREATE VIEW</span><br><span class="line">SHUTDOWN    -- 允许使用mysqladmin shutdown</span><br><span class="line">SUPER   -- 允许使用CHANGE MASTER, KILL, PURGE MASTER LOGS和SET GLOBAL语句，mysqladmin debug命令；允许您连接（一次），即使已达到max_connections。</span><br><span class="line">UPDATE  -- 允许使用UPDATE</span><br><span class="line">USAGE   -- “无权限”的同义词</span><br><span class="line">GRANT OPTION    -- 允许授予权限</span><br></pre></td></tr></table></figure>
+<h2 id="六索引">六、索引</h2>
+<p>索引是数据库用来提高性能的最常用工具，是帮助mysql搞笑获取数据的数据结构。</p>
+<h3 id="概述">概述</h3>
+<p><strong>使用索引的原因</strong></p>
+<ol type="1">
+<li>通过创建唯一性索引，可以保证数据库表中的每一行数据的唯一性。</li>
+<li>可以大大加快数据的检索速度，这也是创建索引的最主要的原因。</li>
+<li>帮助服务器避免排序和临时表</li>
+<li>将随机IO变为顺序IO</li>
+<li>可以加速表之间的连接，特别是在实现数据的参考完整性方面有意义。</li>
+</ol>
+<p><strong>为什么不对表中的每一个列创建一个索引</strong></p>
+<ol type="1">
+<li>当对表中的数据进行增删改时，索引也需要维护，这样就降低了数据的维护速度。</li>
+<li>索引需要占用物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大。</li>
+<li>创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加。</li>
+</ol>
+<p><strong>使用索引的注意事项</strong></p>
+<ol type="1">
+<li>在经常需要搜索的列上，可以加快搜索的速度；</li>
+<li>在经常使用在WHERE子句中的列上面创建索引，加快条件的判断速度。</li>
+<li>在经常需要排序的列上创 建索引，因为索引已经排序，这样查询可以利用索引的排序，加快排序查询时间；</li>
+<li>对于中到大型表索引都是非常有效的，但是特大型表的话维护开销会很大，不适合建索引</li>
+<li>在经常用在连接的列上，这 些列主要是一些外键，可以加快连接的速度；</li>
+<li>避免 where 子句中对字段施加函数，这会造成无法命中索引。</li>
+</ol>
+<h3 id="索引提高查询速度和降低增删改速度的原因">索引提高查询速度和降低增删改速度的原因</h3>
+<blockquote>
+<p>本小节<strong>索引提高查询速度和降低增删改速度的原因</strong>图片和内容来自于Java3y大佬，地址 https://juejin.im/post/5b55b842f265da0f9e589e79</p>
+</blockquote>
+<p>首先了解mysql的基本存储结构（记录都存在页里面）：</p>
+<p><img src="https://camo.githubusercontent.com/7270d42ac72167632458994a3e3c79fdfa8419424b09d53a4b03096dcf2e9c1e/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f6d7973716c2f6d7973716c5f63756e6368752e6a7067" /></p>
+<p><img src="https://camo.githubusercontent.com/b0a5d503b41d0e84d09643a88dd113bf5336de3572799f62bed40f6637de2e15/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f6d7973716c2f6d7973716c5f63756e636875322e6a7067" /></p>
+<ul>
+<li>各个数据也可以组成双向链表</li>
+<li>每个数据也中的记录又可以组成单向链表
+<ul>
+<li>每个数据页都会为存储在它里面的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后在遍历该槽对应分组中的记录即可快速找到指定的记录。</li>
+<li>以其他列（非主键）作为搜索条件：只能从最小记录开始一次遍历单链表中的每条记录。</li>
+</ul></li>
+</ul>
+<p>所以，在使用<code>select * from user where indexname ='xxx'</code>这样没有进行任何优化的sql语句，默认会这样做：</p>
+<ol type="1">
+<li>定位到记录所在的页：需要遍历双向链表，找到所在的页</li>
+<li>从所在的页内中查找相应的记录：由于不是根据主键查询，只能遍历所在页的单链表</li>
+</ol>
+<p>这样的时间复杂度为O(n)</p>
+<p><strong>使用索引之后</strong></p>
+<p><img src="https://camo.githubusercontent.com/594c100a5baf9a033f03cc8f644c983acd17fc8d05d4c932d10fed6a20ee40cd/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f6d7973716c2f6d7973716c5f73756f79696e312e6a7067" /></p>
+<p><img src="https://camo.githubusercontent.com/22874e74dbc9b4a51fbefa0ad9f1672f03121d8c9fcb4addf4ff3647296ba9c4/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f6d7973716c2f6d7973716c5f73756f79696e322e6a7067" /></p>
+<p>没有用索引是需要遍历双向链表来定位对应的页，现在通过&quot;目录&quot;就可以很快的定位到对应的页上。(二分查找，时间复杂度近似O(logn))</p>
+<p>它的底层结构就是B+树。</p>
+<p>但是如果一棵普通的树在<strong>极端</strong>的情况下，是能<strong>退化成链表</strong>的(树的优点就不复存在了)</p>
+<p>B+树是平衡树的一种，是不会退化成链表的，树的高度都是相对比较低的(基本符合<strong>矮矮胖胖(均衡)的结构</strong>)【这样一来我们检索的时间复杂度就是O(logn)】！从上一节的图我们也可以看见，建立索引实际上就是建立一颗B+树。</p>
+<ul>
+<li>B+树是一颗平衡树，如果我们对这颗树增删改的话，那肯定会<strong>破坏它的原有结构</strong>。</li>
+<li><strong>要维持平衡树，就必须做额外的工作</strong>。正因为这些额外的工作<strong>开销</strong>，导致索引会降低增删改的速度</li>
+</ul>
+<h3 id="mysql索引数据结构">mysql索引数据结构</h3>
+<p><strong>哈希索引</strong></p>
+<p>对于哈希索引来说，底层的数据结构就是哈希表，因此在绝大多数需求为单条记录查询的时候，可以选择哈希索引，查询性能最快；其余大部分场景，建议选择BTree索引。哈希索引只有Memory引擎支持。</p>
+<p><strong>BTree索引</strong></p>
+<p>最常见的索引类型，大部分都支持B树索引。</p>
+<p><strong>R-tree 索引</strong>（空间索引）：</p>
+<p>空间索引是MyISAM引擎的一个特殊索引类型，主要用于地理空间数据类型，通常使用较少，不做特别介绍。</p>
+<p><strong>Full-text</strong> （全文索引） ：</p>
+<p>全文索引也是MyISAM的一个特殊索引类型，主要用于全文索引，InnoDB从Mysql5.6版本开始支持全文索引。</p>
+<p><em>平常所说的索引，如果没有特别指明，都是指B+树（多路搜索树，并不一定是二叉的）结构组织的索引。其中聚集索引、复合索引、前缀索引、唯一索引默认都是使用 B+tree 索引，统称为 索引。</em></p>
+<h3 id="索引分类">索引分类</h3>
+<p><strong>普通索引</strong></p>
+<p>这是一种最基本的索引类型，而且他没有唯一性之类的限制。普通索引可以通过以下方式创建：</p>
+<p>创建索引：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index indexName <span class="keyword">ON</span> tableName (columnName)</span><br></pre></td></tr></table></figure>
+<p>修改表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">ADD</span> INDEX indexName(columnName) </span><br></pre></td></tr></table></figure>
+<p>创建表时指定：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tablename(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    name verchar(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    index [indexname](name(length))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>唯一性索引</strong></p>
+<p>和普通索引基本相同，但唯一性索引列的所有值都只能出现一次，即必须唯一。唯一性索引可以通过以下方式创建：</p>
+<p>创建索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create unique index indexName ON tableName (columnName)</span><br></pre></td></tr></table></figure>
+<p>修改表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tablename ADD unique INDEX indexName(columnName) </span><br></pre></td></tr></table></figure>
+<p>创建表时指定：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table tablename(</span><br><span class="line">id int not null,</span><br><span class="line">    name verchar(10) not null,</span><br><span class="line">    unique [indexname](name(length))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>主键</strong></p>
+<p>主键是一种唯一性索引，但它必须指定为“PRIMARY KEY”。如果你曾经用过AUTO_INCREMENT类型的列，你可能已经熟悉主键之类的概念了。</p>
+<p><strong>全文索引</strong></p>
+<p>全文索引的索引类型为FULLTEXT。全文索引可以在VARCHAR或者TEXT类型的列上创建。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tablename add fulltext indexname(columnname)</span><br></pre></td></tr></table></figure>
+<h3 id="索引语法">索引语法</h3>
+<p><strong>创建索引</strong></p>
+<p>见上</p>
+<p><strong>删除索引</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop index indexname on mytable</span><br><span class="line">alter table tablename drop index indexname</span><br></pre></td></tr></table></figure>
+<p>删除主键时只需指定PRIMARY KEY，但在删除索引时，你必须知道索引名。</p>
+<p><strong>显示索引信息</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show index from tablename;</span><br></pre></td></tr></table></figure>
+<h3 id="索引原理">索引原理</h3>
+<p>MySQL官方对索引定义：是存储引擎用于快速查找记录的一种数据结构。需要额外开辟空间和数据维护工作。</p>
+<p>索引是物理数据页存储，在数据文件中（InnoDB，ibd文件）利用数据页存储。索引可以加快检索速度，但是同时也会降低增删改速度，索引维护需要代价。</p>
+<p>索引设计的理论知识：二分查找、Hash和B+Tree</p>
+<p><strong>B+Tree</strong>:</p>
+<p>MySQL数据库索引采用的是B+Tree结构，在B-Tree结构上做了优化改造。</p>
+<p>B-Tree结构：</p>
+<ul>
+<li>索引值和data数据分布在整颗树的结构中</li>
+<li>每个节点可以存放多个索引值以及对应的data数据</li>
+<li>树节点中的多个索引值从左到右升序排列</li>
+</ul>
+<figure>
+<img src="https://camo.githubusercontent.com/8012405924b497f164b8fc2b840d67edc9c97b75c614ff825b4e9f4ae24596ea/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f706963676f2f425452454532303231313130312e706e67" alt="BTREE20211101" /><figcaption>BTREE20211101</figcaption>
+</figure>
+<p>B树的搜索：从根节点开始，对节点内的索引值序列采用二分法查找，如果命中就结束查找。没有命中会进入子节点重复查找过程，直到所对应的的节点指针为空，或已经是叶子节点了才结束。</p>
+<p>B+Tree结构：</p>
+<ul>
+<li>非叶子节点不存储data数据，只存储索引值，这样便于存储更多的索引值</li>
+<li>叶子节点包含了所有的索引值和data数据</li>
+<li>叶子节点用指针连接，提高区间的访问性能</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/ad8ee1bdfc2b767803d2b8ec3e8b28e40181f8bab53c02893aa417ce0b798e0d/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f706963676f2f42504c55535452454532303231313130312e706e67" /></p>
+<p>相比B树，B+树进行范围查找时，只需要查找定位两个节点的索引值，然后利用叶子节点的指针进行遍历即可。而B树需要遍历范围内所有的节点和数据，显然B+Tree效率高</p>
+<p><strong>聚簇索引和辅助索引</strong></p>
+<p>聚簇索引和非聚簇索引：B+Tree的叶子节点存放主键索引值和行记录就属于聚簇索引；如果索引值和行记录分开存放就属于非聚簇索引。</p>
+<p>主键索引和辅助索引：B+Tree的叶子节点存放的是主键字段值就属于主键索引；如果存放的是非主键值就属于辅助索引（二级索引）。</p>
+<p>在InnoDB引擎中，主键索引采用的就是聚簇索引结构存储。</p>
+<ul>
+<li><p>聚簇索引（聚集索引）</p>
+<p>聚簇索引是一种数据存储方式，InnoDB的聚簇索引就是按照主键顺序构建 B+Tree结构。B+Tree的叶子节点就是行记录，行记录和主键值紧凑地存储在一起。 这也意味着 InnoDB 的主键索引就是数据表本身，它按主键顺序存放了整张表的数据，占用的空间就是整个表数据量的大小。通常说的<strong>主键索引</strong>就是聚集索引。</p>
+<p>InnoDB的表要求必须要有聚簇索引：</p>
+<blockquote>
+<p>如果表定义了主键，则主键索引就是聚簇索引</p>
+<p>如果表没有定义主键，则第一个非空unique列作为聚簇索引</p>
+<p>否则InnoDB会从建一个隐藏的row-id作为聚簇索引</p>
+</blockquote></li>
+<li><p>辅助索引</p>
+<p>InnoDB辅助索引，也叫作二级索引，是根据索引列构建 B+Tree结构。但在 B+Tree 的叶子节点中只存了索引列和主键的信息。二级索引占用的空间会比聚簇索引小很多， 通常创建辅助索引就是为了提升查询效率。一个表InnoDB只能创建一个聚簇索引，但可以创建多个辅助索引</p></li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/ec3d14d666ce267eb125a922ca80abacd11e648a1cac4b1e59609f38d8608c55/68747470733a2f2f6d797069632d31323133382e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f626c6f672f706963676f2f696d6167652d32303231313130313139333131303430382e706e67" /></p>
+<p>非聚簇索引</p>
+<p>与InnoDB表存储不同，MyISAM数据表的索引文件和数据文件是分开的，被称为非聚簇索引结构。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://ZYJ1204.github.io">Bug Testing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zyj1204.github.io/2023/01/13/Mysql/">https://zyj1204.github.io/2023/01/13/Mysql/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a></div><div class="post_share"><div class="social-share" data-image="https://img-blog.csdnimg.cn/img_convert/a380f8076cac2a55fb14665bb5cc5c17.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/13/maven/" title="Maven教程"><img class="cover" src="https://camo.githubusercontent.com/89f75dee8103ab14089f9c7c5f5c0204348baff74b4e5b9f7ac359ffa474e48b/68747470733a2f2f7777772e72756e6f6f622e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031382f30392f373634323235362d633936376232633166616562613963652e706e67" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">Maven教程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bug Testing</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZYJ1204"><i></i><span>🛴前往Github...</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><center>快速访问：<br><a target="_blank" rel="noopener" href="https://www.baidu.com"><b><font color="#5ea6e5">百度</font></b></a></center></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">MySQL学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80.-mysql%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">一. MySQL简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 MySQL基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 mysql架构演变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 mysql架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4 mysql运行机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C.-mysql-ddl"><span class="toc-number">1.2.</span> <span class="toc-text">二. MySQL-DDL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据库：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">表：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89.-mysql-dml"><span class="toc-number">1.3.</span> <span class="toc-text">三. MySQL-DML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B.-mysql-dql"><span class="toc-number">1.4.</span> <span class="toc-text">四. MySQL-DQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#select"><span class="toc-number">1.4.1.</span> <span class="toc-text">select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#union"><span class="toc-number">1.4.2.</span> <span class="toc-text">union</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.3.</span> <span class="toc-text">子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#form%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">form形式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#where%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">where形式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.4.</span> <span class="toc-text">连接查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5-inner-join"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">内连接 inner join</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">外连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#truncate"><span class="toc-number">1.4.5.</span> <span class="toc-text">truncate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94mysql-%E5%AF%B9%E7%94%A8%E6%88%B7%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.5.</span> <span class="toc-text">五、MySQL-对用户的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E7%B4%A2%E5%BC%95"><span class="toc-number">1.6.</span> <span class="toc-text">六、索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.6.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%8F%90%E9%AB%98%E6%9F%A5%E8%AF%A2%E9%80%9F%E5%BA%A6%E5%92%8C%E9%99%8D%E4%BD%8E%E5%A2%9E%E5%88%A0%E6%94%B9%E9%80%9F%E5%BA%A6%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.6.2.</span> <span class="toc-text">索引提高查询速度和降低增删改速度的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E7%B4%A2%E5%BC%95%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.6.3.</span> <span class="toc-text">mysql索引数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-number">1.6.4.</span> <span class="toc-text">索引分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-number">1.6.5.</span> <span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.6.</span> <span class="toc-text">索引原理</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://img-blog.csdnimg.cn/img_convert/a380f8076cac2a55fb14665bb5cc5c17.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Bug Testing</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script defer src="/js/cursor.js"></script><script async src="/js/title.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script defer data-pjax src="/js/readPercent.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.34532,23.15624';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题使用Butterfly" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.js"></script><!-- hexo injector body_end end --></body></html>
