@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>3.3.谓词演算的等价式与蕴涵式 | 柚子的技术岛</title><meta name="author" content="Bug Testing"><meta name="copyright" content="Bug Testing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="3.3 谓词演算的等价式与蕴涵式【定义3.7】谓词公式在共同论域等价给定任何两个谓词公式WffA和WffB，设它们有共同的论域E，若对A和B的任一组个体变元进行赋值，所得命题的真值相同，则称谓词公式A和B在E上是等价的，并记作A&lt;&#x3D;&gt;B  【定义3.8】谓词公式有效、无效、可满足给定任意谓词公式WffA，其论域为E，対于A的所有赋值WffA都为真，则称WffA在E上是有效的（或永真的）">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>3.3.谓词演算的等价式与蕴涵式 | 柚子的技术岛</title><meta name="author" content="Bug Testing"><meta name="copyright" content="Bug Testing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="3.3 谓词演算的等价式与蕴涵式 【定义3.7】谓词公式在共同论域等价 给定任何两个谓词公式WffA和WffB，设它们有共同的论域E，若对A和B的任一组个体变元进行赋值，所得命题的真值相同，则称谓词公式A和B在E上是等价的，并记作A&lt;&#x3D;&gt;B 【定义3.8】谓词公式有效、无效、可满足 给定任意谓词公式WffA，其论域为E，対于A的所有赋值WffA都为真，则称WffA在E上是有效的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3.3.谓词演算的等价式与蕴涵式">
 <meta property="og:url" content="https://zyj1204.github.io/2023/01/13/cmath_8/index.html">
 <meta property="og:site_name" content="柚子的技术岛">
-<meta property="og:description" content="3.3 谓词演算的等价式与蕴涵式【定义3.7】谓词公式在共同论域等价给定任何两个谓词公式WffA和WffB，设它们有共同的论域E，若对A和B的任一组个体变元进行赋值，所得命题的真值相同，则称谓词公式A和B在E上是等价的，并记作A&lt;&#x3D;&gt;B  【定义3.8】谓词公式有效、无效、可满足给定任意谓词公式WffA，其论域为E，対于A的所有赋值WffA都为真，则称WffA在E上是有效的（或永真的）">
+<meta property="og:description" content="3.3 谓词演算的等价式与蕴涵式 【定义3.7】谓词公式在共同论域等价 给定任何两个谓词公式WffA和WffB，设它们有共同的论域E，若对A和B的任一组个体变元进行赋值，所得命题的真值相同，则称谓词公式A和B在E上是等价的，并记作A&lt;&#x3D;&gt;B 【定义3.8】谓词公式有效、无效、可满足 给定任意谓词公式WffA，其论域为E，対于A的所有赋值WffA都为真，则称WffA在E上是有效的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png">
 <meta property="article:published_time" content="2023-01-13T12:24:12.295Z">
@@ -128,76 +128,125 @@
     })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/readPercent.css"><div id="myscoll"></div><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
 <style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
   white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
-<link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">柚子的技术岛</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">3.3.谓词演算的等价式与蕴涵式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-13T12:24:12.295Z" title="Created 2023-01-13 20:24:12">2023-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-13T12:38:43.720Z" title="Updated 2023-01-13 20:38:43">2023-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">398</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>1min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="3.3.谓词演算的等价式与蕴涵式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="3-3-谓词演算的等价式与蕴涵式"><a href="#3-3-谓词演算的等价式与蕴涵式" class="headerlink" title="3.3 谓词演算的等价式与蕴涵式"></a>3.3 谓词演算的等价式与蕴涵式</h1><h5 id="【定义3-7】谓词公式在共同论域等价"><a href="#【定义3-7】谓词公式在共同论域等价" class="headerlink" title="【定义3.7】谓词公式在共同论域等价"></a>【定义3.7】谓词公式在共同论域等价</h5><pre><code>给定任何两个谓词公式WffA和WffB，设它们有共同的论域E，若对A和B的任一组个体变元进行赋值，所得命题的真值相同，则称谓词公式A和B在E上是等价的，并记作A&lt;=&gt;B
-</code></pre>
-<h5 id="【定义3-8】谓词公式有效、无效、可满足"><a href="#【定义3-8】谓词公式有效、无效、可满足" class="headerlink" title="【定义3.8】谓词公式有效、无效、可满足"></a>【定义3.8】谓词公式有效、无效、可满足</h5><pre><code>给定任意谓词公式WffA，其论域为E，対于A的所有赋值WffA都为真，则称WffA在E上是有效的（或永真的）。如果在所有赋值下WffA都为假，则称WffA为不可满足的。如果至少在一种赋值下为真，则称该WffA为可满足的。
-</code></pre>
-<h5 id="【定理3-1】量词与否定联结词之间有如下关系"><a href="#【定理3-1】量词与否定联结词之间有如下关系" class="headerlink" title="【定理3.1】量词与否定联结词之间有如下关系"></a>【定理3.1】量词与否定联结词之间有如下关系</h5><ul>
-<li>¬∀xQ(x) &lt;&#x3D;&gt; ∃x¬Q(x)</li>
-<li>¬∃xQ(x) &lt;&#x3D;&gt; ∀x¬Q(x)</li>
+<link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">柚子的技术岛</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">3.3.谓词演算的等价式与蕴涵式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-13T12:24:12.295Z" title="Created 2023-01-13 20:24:12">2023-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-13T12:38:43.720Z" title="Updated 2023-01-13 20:38:43">2023-01-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">382</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>1min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="3.3.谓词演算的等价式与蕴涵式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="谓词演算的等价式与蕴涵式">3.3 谓词演算的等价式与蕴涵式</h1>
+<h5 id="定义3.7谓词公式在共同论域等价">【定义3.7】谓词公式在共同论域等价</h5>
+<pre><code>给定任何两个谓词公式WffA和WffB，设它们有共同的论域E，若对A和B的任一组个体变元进行赋值，所得命题的真值相同，则称谓词公式A和B在E上是等价的，并记作A&lt;=&gt;B</code></pre>
+<h5 id="定义3.8谓词公式有效无效可满足">【定义3.8】谓词公式有效、无效、可满足</h5>
+<pre><code>给定任意谓词公式WffA，其论域为E，対于A的所有赋值WffA都为真，则称WffA在E上是有效的（或永真的）。如果在所有赋值下WffA都为假，则称WffA为不可满足的。如果至少在一种赋值下为真，则称该WffA为可满足的。</code></pre>
+<h5 id="定理3.1量词与否定联结词之间有如下关系">【定理3.1】量词与否定联结词之间有如下关系</h5>
+<ul>
+<li>¬∀xQ(x) &lt;=&gt; ∃x¬Q(x)</li>
+<li>¬∃xQ(x) &lt;=&gt; ∀x¬Q(x)</li>
 </ul>
-<h5 id="表3-1-谓词等值式与蕴涵式"><a href="#表3-1-谓词等值式与蕴涵式" class="headerlink" title="表3.1 谓词等值式与蕴涵式"></a>表3.1 谓词等值式与蕴涵式</h5><p>¬、∧、∨、→、↔</p>
+<h5 id="表3.1-谓词等值式与蕴涵式">表3.1 谓词等值式与蕴涵式</h5>
+<p>¬、∧、∨、→、↔</p>
 <table>
 <thead>
-<tr>
-<th align="center">E<sub>23</sub></th>
-<th align="center">∃x(A(x) ∨ B(x)) &lt;&#x3D;&gt; ∃xA(x) ∨ ∃xB(x)</th>
+<tr class="header">
+<th style="text-align: center;">E<sub>23</sub></th>
+<th style="text-align: center;">∃x(A(x) ∨ B(x)) &lt;=&gt; ∃xA(x) ∨ ∃xB(x)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">E<sub>24</sub></td>
-<td align="center">∀x(A(x) ∧ B(x)) &lt;&#x3D;&gt; ∀xA(x) ∧ ∀xB(x)</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">E<sub>24</sub></td>
+<td style="text-align: center;">∀x(A(x) ∧ B(x)) &lt;=&gt; ∀xA(x) ∧ ∀xB(x)</td>
 </tr>
-<tr>
-<td align="center">E<sub>25</sub></td>
-<td align="center">¬∃xA(x) &lt;&#x3D;&gt; ∀x¬A(x)</td>
+<tr class="even">
+<td style="text-align: center;">E<sub>25</sub></td>
+<td style="text-align: center;">¬∃xA(x) &lt;=&gt; ∀x¬A(x)</td>
 </tr>
-<tr>
-<td align="center">E<sub>26</sub></td>
-<td align="center">¬∀xA(x) &lt;&#x3D;&gt; ∃x¬A(x)</td>
+<tr class="odd">
+<td style="text-align: center;">E<sub>26</sub></td>
+<td style="text-align: center;">¬∀xA(x) &lt;=&gt; ∃x¬A(x)</td>
 </tr>
-<tr>
-<td align="center">E<sub>27</sub></td>
-<td align="center">∀x(A∨ B(x)) &lt;&#x3D;&gt; A∨∀xB(x)</td>
+<tr class="even">
+<td style="text-align: center;">E<sub>27</sub></td>
+<td style="text-align: center;">∀x(A∨ B(x)) &lt;=&gt; A∨∀xB(x)</td>
 </tr>
-<tr>
-<td align="center">E<sub>28</sub></td>
-<td align="center">∃x(A∧ B(x)) &lt;&#x3D;&gt; A∧∃xB(x)</td>
+<tr class="odd">
+<td style="text-align: center;">E<sub>28</sub></td>
+<td style="text-align: center;">∃x(A∧ B(x)) &lt;=&gt; A∧∃xB(x)</td>
 </tr>
-<tr>
-<td align="center">E<sub>29</sub></td>
-<td align="center">∃x(A(x) → B(x)) &lt;&#x3D;&gt; ∀xA(x)→∃xB(x)</td>
+<tr class="even">
+<td style="text-align: center;">E<sub>29</sub></td>
+<td style="text-align: center;">∃x(A(x) → B(x)) &lt;=&gt; ∀xA(x)→∃xB(x)</td>
 </tr>
-<tr>
-<td align="center">E<sub>30</sub></td>
-<td align="center">∀xA(x) →B &lt;&#x3D;&gt; ∃x(A(x) →B)</td>
+<tr class="odd">
+<td style="text-align: center;">E<sub>30</sub></td>
+<td style="text-align: center;">∀xA(x) →B &lt;=&gt; ∃x(A(x) →B)</td>
 </tr>
-<tr>
-<td align="center">E<sub>31</sub></td>
-<td align="center">∃xA(x) →B &lt;&#x3D;&gt; ∀x(A(x) →B)</td>
+<tr class="even">
+<td style="text-align: center;">E<sub>31</sub></td>
+<td style="text-align: center;">∃xA(x) →B &lt;=&gt; ∀x(A(x) →B)</td>
 </tr>
-<tr>
-<td align="center">E<sub>32</sub></td>
-<td align="center">A→∀xB(x) &lt;&#x3D;&gt; ∀x(A →B(x))</td>
+<tr class="odd">
+<td style="text-align: center;">E<sub>32</sub></td>
+<td style="text-align: center;">A→∀xB(x) &lt;=&gt; ∀x(A →B(x))</td>
 </tr>
-<tr>
-<td align="center">E<sub>33</sub></td>
-<td align="center">A→∃xB(x) &lt;&#x3D;&gt; ∃x(A →B(x))</td>
+<tr class="even">
+<td style="text-align: center;">E<sub>33</sub></td>
+<td style="text-align: center;">A→∃xB(x) &lt;=&gt; ∃x(A →B(x))</td>
 </tr>
-<tr>
-<td align="center">I<sub>17</sub></td>
-<td align="center">∀xA(x) ∨ ∀xB(x) &#x3D;&gt; ∀x(A(x) ∨ B(x))</td>
+<tr class="odd">
+<td style="text-align: center;">I<sub>17</sub></td>
+<td style="text-align: center;">∀xA(x) ∨ ∀xB(x) =&gt; ∀x(A(x) ∨ B(x))</td>
 </tr>
-<tr>
-<td align="center">I<sub>18</sub></td>
-<td align="center">∃x(A(x) ∧ B(x))  &#x3D;&gt; ∃xA(x) ∧ ∃xB(x)</td>
+<tr class="even">
+<td style="text-align: center;">I<sub>18</sub></td>
+<td style="text-align: center;">∃x(A(x) ∧ B(x)) =&gt; ∃xA(x) ∧ ∃xB(x)</td>
 </tr>
-<tr>
-<td align="center">I<sub>19</sub></td>
-<td align="center">∃xA(x)→∀xB(x) &#x3D;&gt; ∀x(A(x) → B(x))</td>
+<tr class="odd">
+<td style="text-align: center;">I<sub>19</sub></td>
+<td style="text-align: center;">∃xA(x)→∀xB(x) =&gt; ∀x(A(x) → B(x))</td>
 </tr>
-</tbody></table>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://ZYJ1204.github.io">Bug Testing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zyj1204.github.io/2023/01/13/cmath_8/">https://zyj1204.github.io/2023/01/13/cmath_8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></div><div class="post_share"><div class="social-share" data-image="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/13/cmath_1/" title="1.1.基本概念"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">1.1.基本概念</div></div></a></div><div><a href="/2023/01/13/cmath_2/" title="1.2.命题公示的等值演算"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">1.2.命题公示的等值演算</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bug Testing</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZYJ1204"><i></i><span>🛴前往Github...</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><center>快速访问：<br><a target="_blank" rel="noopener" href="https://www.baidu.com"><b><font color="#5ea6e5">百度</font></b></a></center></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-3-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E7%AD%89%E4%BB%B7%E5%BC%8F%E4%B8%8E%E8%95%B4%E6%B6%B5%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">3.3 谓词演算的等价式与蕴涵式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%90%E5%AE%9A%E4%B9%893-7%E3%80%91%E8%B0%93%E8%AF%8D%E5%85%AC%E5%BC%8F%E5%9C%A8%E5%85%B1%E5%90%8C%E8%AE%BA%E5%9F%9F%E7%AD%89%E4%BB%B7"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">【定义3.7】谓词公式在共同论域等价</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%90%E5%AE%9A%E4%B9%893-8%E3%80%91%E8%B0%93%E8%AF%8D%E5%85%AC%E5%BC%8F%E6%9C%89%E6%95%88%E3%80%81%E6%97%A0%E6%95%88%E3%80%81%E5%8F%AF%E6%BB%A1%E8%B6%B3"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">【定义3.8】谓词公式有效、无效、可满足</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%90%E5%AE%9A%E7%90%863-1%E3%80%91%E9%87%8F%E8%AF%8D%E4%B8%8E%E5%90%A6%E5%AE%9A%E8%81%94%E7%BB%93%E8%AF%8D%E4%B9%8B%E9%97%B4%E6%9C%89%E5%A6%82%E4%B8%8B%E5%85%B3%E7%B3%BB"><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">【定理3.1】量词与否定联结词之间有如下关系</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A83-1-%E8%B0%93%E8%AF%8D%E7%AD%89%E5%80%BC%E5%BC%8F%E4%B8%8E%E8%95%B4%E6%B6%B5%E5%BC%8F"><span class="toc-number">1.0.0.0.4.</span> <span class="toc-text">表3.1 谓词等值式与蕴涵式</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Bug Testing</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer src="/js/cursor.js"></script><script async src="/js/title.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script defer data-pjax src="/js/readPercent.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+</tbody>
+</table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://ZYJ1204.github.io">Bug Testing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zyj1204.github.io/2023/01/13/cmath_8/">https://zyj1204.github.io/2023/01/13/cmath_8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></div><div class="post_share"><div class="social-share" data-image="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/13/cmath_1/" title="1.1.基本概念"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">1.1.基本概念</div></div></a></div><div><a href="/2023/01/13/cmath_2/" title="1.2.命题公示的等值演算"><img class="cover" src="https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">1.2.命题公示的等值演算</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bug Testing</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZYJ1204"><i></i><span>🛴前往Github...</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><center>快速访问：<br><a target="_blank" rel="noopener" href="https://www.baidu.com"><b><font color="#5ea6e5">百度</font></b></a></center></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E7%AD%89%E4%BB%B7%E5%BC%8F%E4%B8%8E%E8%95%B4%E6%B6%B5%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">3.3 谓词演算的等价式与蕴涵式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%893.7%E8%B0%93%E8%AF%8D%E5%85%AC%E5%BC%8F%E5%9C%A8%E5%85%B1%E5%90%8C%E8%AE%BA%E5%9F%9F%E7%AD%89%E4%BB%B7"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">【定义3.7】谓词公式在共同论域等价</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%893.8%E8%B0%93%E8%AF%8D%E5%85%AC%E5%BC%8F%E6%9C%89%E6%95%88%E6%97%A0%E6%95%88%E5%8F%AF%E6%BB%A1%E8%B6%B3"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">【定义3.8】谓词公式有效、无效、可满足</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%863.1%E9%87%8F%E8%AF%8D%E4%B8%8E%E5%90%A6%E5%AE%9A%E8%81%94%E7%BB%93%E8%AF%8D%E4%B9%8B%E9%97%B4%E6%9C%89%E5%A6%82%E4%B8%8B%E5%85%B3%E7%B3%BB"><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">【定理3.1】量词与否定联结词之间有如下关系</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A83.1-%E8%B0%93%E8%AF%8D%E7%AD%89%E5%80%BC%E5%BC%8F%E4%B8%8E%E8%95%B4%E6%B6%B5%E5%BC%8F"><span class="toc-number">1.0.0.0.4.</span> <span class="toc-text">表3.1 谓词等值式与蕴涵式</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://p8.itc.cn/images01/20200627/95bc25c9b13a48d7a985d10b2bc1430d.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Bug Testing</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script defer src="/js/cursor.js"></script><script async src="/js/title.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script defer data-pjax src="/js/readPercent.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
   function butterfly_clock_anzhiyu_injector_config(){
     var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
     var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
