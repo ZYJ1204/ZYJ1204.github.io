@@ -1,0 +1,373 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>动态时间规整 | 柚子的技术岛</title><meta name="author" content="Bug Testing"><meta name="copyright" content="Bug Testing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="DTW 定义 动态时间规整（Dynamic Time Warping，DTW）用于比较具有不同长度的两个阵列或时间序列之间的相似性或距离。 假设要计算两个等长数组的距离： 123a &#x3D; [1, 2, 3]b &#x3D; [3, 2, 2] 最简单的使用欧氏距离进行计算，但如果 a 和 b 的长度不同怎么办？ 123a &#x3D; [1, 2, 3]b &#x3D; [2, 2, 2, 3, 4] DTW 解决了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态时间规整">
+<meta property="og:url" content="https://zyj1204.github.io/2023/01/14/DTWl/index.html">
+<meta property="og:site_name" content="柚子的技术岛">
+<meta property="og:description" content="DTW 定义 动态时间规整（Dynamic Time Warping，DTW）用于比较具有不同长度的两个阵列或时间序列之间的相似性或距离。 假设要计算两个等长数组的距离： 123a &#x3D; [1, 2, 3]b &#x3D; [3, 2, 2] 最简单的使用欧氏距离进行计算，但如果 a 和 b 的长度不同怎么办？ 123a &#x3D; [1, 2, 3]b &#x3D; [2, 2, 2, 3, 4] DTW 解决了">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c0028087889a44ffad2981f9f1bb7eb5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2023-01-14T09:05:13.562Z">
+<meta property="article:modified_time" content="2023-01-14T09:06:28.232Z">
+<meta property="article:author" content="Bug Testing">
+<meta property="article:tag" content="语音特征">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/c0028087889a44ffad2981f9f1bb7eb5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zyj1204.github.io/2023/01/14/DTWl/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '动态时间规整',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-14 17:06:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/readPercent.css"><link rel="stylesheet" href="/css/progress_bar.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/test.css"><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/assets/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img-blog.csdnimg.cn/c0028087889a44ffad2981f9f1bb7eb5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16')"><nav id="nav"><span id="blog-info"><a href="/" title="柚子的技术岛"><span class="site-name">柚子的技术岛</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">动态时间规整</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-14T09:05:13.562Z" title="Created 2023-01-14 17:05:13">2023-01-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-14T09:06:28.232Z" title="Updated 2023-01-14 17:06:28">2023-01-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%AD%E9%9F%B3%E7%89%B9%E5%BE%81/">语音特征</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">4.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>17min</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="dtw-定义">DTW 定义</h2>
+<p>动态时间规整（Dynamic Time Warping，DTW）用于<strong>比较具有不同长度的两个阵列或时间序列之间的相似性或距离</strong>。</p>
+<p>假设要计算两个等长数组的距离：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [1, 2, 3]</span><br><span class="line">b = [3, 2, 2]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最简单的使用欧氏距离进行计算，但如果 a 和 b 的长度不同怎么办？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [1, 2, 3]</span><br><span class="line">b = [2, 2, 2, 3, 4]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>DTW 解决了这个问题，正如其名，规整序列以使其匹配。比较不同长度的数组的想法是<strong>建立一对多和多对一的匹配，这样两者之间的总距离可以最小化</strong>。</p>
+<p>假设我们有两个不同的数组，红色和蓝色，不同的长度：<br />
+<img src="https://img-blog.csdnimg.cn/5bc5151578d444cda1c323a70dca0402.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /><br />
+<strong>显然这两个序列遵循相同的模式，但蓝色曲线比红色曲线长</strong>。如果我们应用顶部所示的一对一匹配，则映射不会完全同步，蓝色曲线的尾部会被遗漏。DTW 通过开发一对一解决了这个问题许多匹配使得具有相同模式的波谷和波峰完美匹配，并且两条曲线都没有遗漏（图片底部）。</p>
+<h2 id="dtw-计算过程"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>DTW 计算过程</h2>
+<p>DTW 是一种计算两个给定序列（例如时间序列）之间的最佳匹配的方法：</p>
+<ul>
+<li>第一个序列中的每个索引必须与另一个序列中的一个或多个索引匹配，反之亦然</li>
+<li>第一个序列的第一个索引必须与另一个序列的第一个索引匹配（但它不必是唯一匹配）</li>
+<li>第一个序列的最后一个索引必须与另一个序列的最后一个索引匹配（但不一定是唯一匹配）</li>
+<li><strong>第一个序列的索引到另一个序列的索引的映射必须是单调递增的，并且反之亦然</strong>，即如果 j &gt; i 是来自第一个序列的索引，则在另一个序列中不能有两个索引 l &gt; k，这样索引 i 与索引 l 匹配，索引 j 与索引 k 匹配，反之亦然</li>
+</ul>
+<p>最佳匹配由满足所有其余部分的匹配表示 rictions 和 rules 并且具有最小代价，其中代价计算为每个匹配的索引对在它们的值之间的绝对差的总和。</p>
+<p>总而言之，head 和 tail 必须在位置上匹配，没有交叉匹配，也没有被遗漏。</p>
+<h1 id="dtw-形式化定义"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>DTW 形式化定义</h1>
+<p>动态时间规整（DTW）可以在一定的限制下找到两个给定（时间相关）序列之间的最佳对齐（图 4.1）。直观地说，序列以非线性方式规整以相互匹配。最初，DTW 已被用于比较自动语音识别中的不同语音模式，参见 [170]。在数据挖掘和信息检索等领域，DTW 已成功应用于自动处理与时间相关时变和不同速度的数据。<br />
+<img src="https://img-blog.csdnimg.cn/c0028087889a44ffad2981f9f1bb7eb5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /></p>
+<h2 id="经典的-dtw"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>经典的 DTW</h2>
+<p><img src="https://img-blog.csdnimg.cn/ceafeda8ac8c42d9b6cca6f98f6ad438.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /><br />
+DTW 的目标是比较长度为 N ∈ N N ∈ \N N∈N 的两个（时间相关）序列 X : = ( x 1 , x 2 , . . . , x N ) X := (x_1, x_2, ..., x_N) X:=(x1​,x2​,...,xN​) 和长度为 Y : = ( y 1 , y 2 , . . . , y M ) M ∈ N Y := (y_1, y_2, ..., y_M)\ M ∈ \N Y:=(y1​,y2​,...,yM​) M∈N。这些序列可能是离散信号（时间序列），更一般地说，是在等距时间点采样的特征序列。在下文中，我们固定一个由 F \mathcal{F} F 表示的特征空间。对于 n ∈ [ 1 : N ] n \in [1 : N] n∈[1:N] 和 m ∈ [ 1 : M ] m \in [1 : M] m∈[1:M]， x n , y m ∈ F x_n, y_m \in \mathcal{F} xn​,ym​∈F 。为了<strong>比较两个不同的特征 x , y ∈ F x, y \in \mathcal{F} x,y∈F</strong>，需要一个局部代价度量，有时也称为<strong>局部距离度量，它被定义为一个函数</strong><br />
+<img src="https://img-blog.csdnimg.cn/197eab578d0f4d14a4bbd67eed40b462.png" alt="在这里插入图片描述" /><br />
+<strong>通常，如果 x x x 和 y y y 彼此相似，则 c ( x , y ) c(x, y) c(x,y) 小（代价低），否则 c ( x , y ) c(x, y) c(x,y) 大（代价高）</strong>。评估序列 X X X 和 Y Y Y 的每一对元素的局部代价度量，得到由 C ( n , m ) : = c ( x n , y m ) C(n, m) : = c(x_n, y_m) C(n,m):=c(xn​,ym​) 定义的<strong>代价矩阵</strong> C ∈ R N × M C ∈ \R^{N×M} C∈RN×M，见图 4.2。然后<strong>目标是在 X X X 和 Y Y Y 之间找到一个总体代价最小的对齐方式</strong>。直观地说，<strong>这样的最佳对齐沿着代价矩阵 C C C 内的低代价“谷”运行</strong>，参见图 4.4 的说明。下一个定义形式化了<strong>对齐</strong>的概念。<br />
+<img src="https://img-blog.csdnimg.cn/d036edd7b8f542b48e52f3242e717d72.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /><br />
+<img src="https://img-blog.csdnimg.cn/0603e1c54e8e408eae57f78d4fd25400.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /><br />
+注意，<strong>步长条件 (iii) 意味着单调性条件 (ii)</strong>。 ( N , M ) (N, M) (N,M)-warping path p = ( p 1 , . . . , p L ) p = (p_1, ..., p_L) p=(p1​,...,pL​) 定义了两个序列 X = ( x 1 , x 2 , . . . , x N ) X = (x_1, x_2, ..., x_N ) X=(x1​,x2​,...,xN​) 和 Y = ( y 1 , y 2 , . . . , y M ) Y = (y_1, y_2, ... , y_M) Y=(y1​,y2​,...,yM​) 之间的对齐，通过将 X X X 的元素 x n l x_{n_l} xnl​​ 分配给 Y Y Y 的元素 y m l y_{m_l} yml​​ 。</p>
+<ul>
+<li><strong>边界条件强制 X X X 和 Y Y Y 的第一个元素以及 X X X 和 Y Y Y 的最后一个元素相互对齐。换句话说，对齐（alignment）是指整个序列 X X X 和 Y Y Y</strong>。</li>
+<li>单调性条件反映了<strong>忠实计时（faithful timing）的要求</strong>：如果 X X X 中的一个元素先于第二个元素，这也应该适用于 Y Y Y 中的相应元素，反之亦然。</li>
+<li>步长条件表达了一种<strong>连续性条件</strong>： X X X 和 Y Y Y 中的任何元素都不能省略，并且<strong>对齐中没有重复，即规整路径 p p p 中包含的所有索引对都是成对不同的</strong>。</li>
+</ul>
+<p>图 4.3 说明了这三个条件。<strong>如果理解了上边提到的三个条件，这三幅图也很好明白。图 b 违反了边界条件，即第一个元素和最后一元素都没有分别对齐。图 c 违反了单调性，即序列 Y 的时刻超过了 X 的时刻（横轴的 3,4），因为 Y 是短的序列，它的元素索引不能大于较长的序列 X 否则会导致重复映射的情况，因为后边的元素不够分了，这在图 c 中也可以很清晰的看出来。图 d 违反了连续性条件，即两个序列之间的对齐不能跳过元素</strong>。<br />
+<img src="https://img-blog.csdnimg.cn/ff93b8aa56554828a05845dfaec37b0d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /><br />
+X X X 和 Y Y Y 之间相对于局部代价度量 c c c 的总代价 c p ( X , Y ) c_p(X, Y ) cp​(X,Y) 定义为<br />
+<img src="https://img-blog.csdnimg.cn/3462863c5a8b47b598a8da00952665a6.png" alt="在这里插入图片描述" /><br />
+此外， <strong>X X X 和 Y Y Y 之间的最佳规整路径（wraping path）是在所有可能的规整路径中总代价最小的规整路径 p ∗ p^* p∗</strong>。然后将 X X X 和 Y Y Y 之间的 DTW 距离 D T W ( X , Y ) DTW(X, Y) DTW(X,Y) 定义为 p ∗ p^* p∗ 的总代价：<br />
+<img src="https://img-blog.csdnimg.cn/aebd655c18414c1480fe69c03edfe3a6.png" alt="在这里插入图片描述" /><br />
+我们继续对 DTW 距离进行一些评论。</p>
+<ul>
+<li>首先，请注意 DTW 距离是明确定义的，即使可能存在若干条总代价最低的规整路径（wrapping path）。</li>
+<li><strong>其次，在局部代价度量 c c c 对称的情况下，很容易看出 DTW 距离是对称的</strong>。然而，<strong>即使 c c c 成立，DTW 距离通常也不是正定的</strong>。例如，在 c ( x 1 ， x 1 ) = c ( x 2 ， x 2 ) = 0 c(x_1，x_1) = c(x_2，x_2) = 0 c(x1​，x1​)=c(x2​，x2​)=0 的情况下，对于序列 X : = ( x 1 ， x 2 ) X := (x_1，x_2) X:=(x1​，x2​) 和 Y : = ( x 1 ， x 1 ， x 2 ， x 2 ) Y := (x_1，x_1，x_2，x_2) Y:=(x1​，x1​，x2​，x2​)，可以得到 D T W ( X ， Y ) = 0 DTW(X，Y ) = 0 DTW(X，Y)=0。</li>
+<li>此外，即使在 c c c 是度量的情况下，<strong>DTW 距离通常也不满足三角形不等式</strong>。</li>
+</ul>
+<p>下面的例子说明了这一事实。</p>
+<p>例 4.2。设 F : = { α ， β ， γ } F := \{α，β，γ\} F:={α，β，γ} 是由三个特征组成的特征空间。我们定义一个代价度量 c : F × F → { 0 , 1 } c : \mathcal{F} × \mathcal{F} \rightarrow \{0, 1\} c:F×F→{0,1}，通过以下规则：对于 x , y ∈ F x, y \in \mathcal{F} x,y∈F，如果 x = y x = y x=y，则 c ( x ， y ) : = 0 c(x，y) : = 0 c(x，y):=0 ；如果 x ≠ y x \neq y x​=y ，则 c ( x ， y ) : = 1 c(x，y) : = 1 c(x，y):=1。<strong>注意， c c c 定义了 F \mathcal{F} F上的一个度量，特别满足三角不等式</strong>。现在考虑 X : = ( α ， β ， γ ) , Y : = ( α ， β ， β ， γ ) , Z : = ( α ， γ ， γ ) X := (α，β，γ), Y := (α，β，β，γ), Z := (α，γ，γ) X:=(α，β，γ),Y:=(α，β，β，γ),Z:=(α，γ，γ)。那么很容易检查出 D T W ( X , Y ) = 0 DTW(X, Y ) = 0 DTW(X,Y)=0， D T W ( X , Z ) = 1 DTW (X, Z) = 1 DTW(X,Z)=1， D T W ( Y , Z ) = 2 DTW(Y, Z) = 2 DTW(Y,Z)=2。因此， D T W ( Y , Z ) &gt; D T W ( X , Y ) + D T W ( X , Z ) DTW(Y, Z) &gt; DTW(X, Y ) + D T W (X, Z) DTW(Y,Z)&gt;DTW(X,Y)+DTW(X,Z)，即 DTW 距离不满足三角形不等式。最后，注意路径 p 1 = ( ( 1 , 1 ) , ( 2 , 2 ) , ( 3 , 2 ) , ( 4 , 3 ) ) p^1 = ((1, 1), (2, 2), (3, 2), (4, 3)) p1=((1,1),(2,2),(3,2),(4,3))， p 2 = ( ( 1 , 1 ) , ( 2 , 1 ) , ( 3 , 2 ) , ( 4 , 3 ) ) p^2 = ((1, 1), (2, 1), (3, 2), (4, 3)) p2=((1,1),(2,1),(3,2),(4,3))， p 3 = ( ( 1 , 1 ) , ( 2 , 2 ) , ( 3 , 3 ) , ( 4 , 3 ) ) p^3 = ((1, 1), (2, 2), (3, 3), (4, 3)) p3=((1,1),(2,2),(3,3),(4,3)) 是总代价 2 的 Y 和 Z 之间的不同最优规整路径。<strong>这表明最优规整路径通常不是唯一的</strong>。</p>
+<p><strong>为了确定最优路径 p ∗ p^* p∗，可以测试 X X X 和 Y Y Y 之间的每条可能的规整路径</strong>。然而，这样的过程会导致计算复杂度在长度 N N N 和 M M M 上呈指数增长。我们现在将介绍基于动态规划的 O ( N M ) O(NM) O(NM) 算法。为此，我们<strong>定义前缀序列</strong> X ( 1 : n ) : = ( x 1 , . . . x n ) X(1 :n) : = (x_1, . . . x_n) X(1:n):=(x1​,...xn​)， n ∈ [ 1 : N ] n ∈ [1 : N] n∈[1:N] 和 Y ( 1 : m ) : = ( y 1 , . . . y m ) Y (1:m) : = (y_1, . . . y_m) Y(1:m):=(y1​,...ym​)， m ∈ [ 1 : M ] m∈ [1 : M] m∈[1:M]，并设置<br />
+<img src="https://img-blog.csdnimg.cn/d11f03200d1545bb985374ed9fa16505.png" alt="在这里插入图片描述" /><br />
+值 D ( n , m ) D(n, m) D(n,m) 定义了一个 N × M N × M N×M 矩阵 D D D，也称为<strong>累积代价矩阵（accumulated cost matrix）</strong>。显然，有 D ( N , M ) = D T W ( X , Y ) D(N, M) = DTW (X, Y) D(N,M)=DTW(X,Y)。在下文中，<strong>表示代价矩阵 C C C 或累积代价矩阵 D D D 的矩阵元素的元组 ( n , m ) (n,m) (n,m) 将被称为单元</strong>。下一个定理展示了如何有效地计算 D D D。<br />
+<img src="https://img-blog.csdnimg.cn/a03fd4d0d91a4f628d5c31d541e0b373.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /><br />
+证明。设 m = 1 m = 1 m=1 和 n ∈ [ 1 : N ] n ∈ [1 : N] n∈[1:N]。那么在 Y ( 1 : 1 ) Y (1 : 1) Y(1:1) 和 X ( 1 : n ) X(1 : n) X(1:n) 之间只有一个可能的规整路径，总代价为 ∑ k = 1 n c ( x k , y 1 ) \sum^n_{k=1} c(x_k, y_1) ∑k=1n​c(xk​,y1​)。这证明了 D ( n , 1 ) D(n, 1) D(n,1) 的公式。类似地，可以得到 D ( 1 , m ) D(1, m) D(1,m) 的公式。现在，让 n &gt; 1 n &gt; 1 n&gt;1 和 m &gt; 1 m &gt; 1 m&gt;1 并让 q = ( q 1 , . . . . , q L − 1 , q L ) q = (q_1, ...., q_{L−1}, q_L) q=(q1​,....,qL−1​,qL​) 是 X ( 1 : n ) X(1:n) X(1:n) 和 Y ( 1 : m ) Y(1:m) Y(1:m) 的最佳规整路径。那么边界条件意味着 q L = ( n , m ) q_L = (n, m) qL​=(n,m)。设置 ( a , b ) : = q L − 1 (a, b) : = q_{L-1} (a,b):=qL−1​，步长条件意味着 ( a , b ) ∈ { ( n − 1 , m − 1 ) , ( n − 1 , m ) , ( n , m − 1 ) } (a, b) \in \{(n - 1, m - 1), (n - 1, m), (n, m - 1)\} (a,b)∈{(n−1,m−1),(n−1,m),(n,m−1)}。此外， ( q 1 , . . . , q L − 1 ) (q_1, . . . , q_{L−1}) (q1​,...,qL−1​) 必须是 X ( 1 : a ) X(1:a) X(1:a) 和 Y ( 1 : b ) Y(1:b) Y(1:b) 的最优规整路径。否则， q q q 对于 X ( 1 : n ) X(1 :n) X(1:n) 和 Y ( 1 : m ) Y(1:m) Y(1:m) 不是最优的。由于 D ( n , m ) = c ( q 1 , . . . , q L − 1 ) ( X ( 1 : a ) , Y ( 1 : b ) ) + c ( x n , y m ) D(n, m) = c(q_1,...,q_{L−1})(X(1 : a), Y (1 : b)) + c(x_n, y_m) D(n,m)=c(q1​,...,qL−1​)(X(1:a),Y(1:b))+c(xn​,ym​)， q q q 的最优性意味着断言（4.5）。</p>
+<p>定理 4.3 有助于矩阵 D D D 的递归计算。初始化可以将矩阵 D D D 扩展为额外的行和列，并设置：对于 n ∈ [ 1 : N ] n \in [1:N] n∈[1:N]， D ( n , 0 ) : = ∞ D(n, 0) := \infin D(n,0):=∞；对于 m ∈ [ 1 : M ] m ∈ [1 : M] m∈[1:M]， D ( 0 , m ) : = ∞ D( 0, m) : = \infin D(0,m):=∞； D ( 0 , 0 ) : = 0 D(0, 0) := 0 D(0,0):=0。那么 (4.5) 的递归对于 n ∈ [ 1 : N ] n \in [1:N] n∈[1:N] 和 m ∈ [ 1 : M ] m ∈ [1 : M] m∈[1:M] 成立。此外，请注意 D D D 可以按列方式计算，其中第 m m m 列的计算只需要第 ( m − 1 ) (m - 1) (m−1) 列的值。这意味着，如果只对值 D T W ( X , Y ) = D ( N , M ) DTW(X, Y ) = D(N, M) DTW(X,Y)=D(N,M) 感兴趣，则存储需求为 O ( N ) O(N) O(N)。类似地，可以以逐行方式进行，导致 O ( M ) O(M) O(M)。但是无论哪种情况，运行时间都是 O ( N M ) O(NM) O(NM)。此外，为了计算最优的规整路径 p ∗ p^∗ p∗，需要整个 ( N × M ) (N × M) (N×M)-matrix D D D。作为练习，下面的 Optimal Warping Path 算法可以完成这项任务。<br />
+<img src="https://img-blog.csdnimg.cn/f9578171d04f4f43a650bd5926c2a551.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /><br />
+图 4.4 显示了图 4.2 中序列的最佳规整路径 p ∗ p^∗ p∗ (白线)。请注意， p ∗ p^∗ p∗ 仅涵盖 C 中表现出低代价的单元格 (参见图 4.4 a)。最终的累积代价矩阵 D D D 如图 4.4 b 所示。<br />
+<img src="https://img-blog.csdnimg.cn/2901c11e69ef42518ae8c81ccbae7dd9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" /></p>
+<h2 id="dtw-的变体"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>DTW 的变体</h2>
+<p>动态时间规整算法及其变体（本表基于 Time2Graph ）</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Paper (Author)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DTW</td>
+<td>Dynamic time warping. (Müller, 2007)</td>
+</tr>
+<tr class="even">
+<td>WDTW</td>
+<td>Weighted dynamic time warping for time series classification. (Jeong, Jeong, and Omitaomu 2011)</td>
+</tr>
+<tr class="odd">
+<td>CID</td>
+<td>Cid: an efficient complexity-invariant distance for time series. (Batista et al . 2014)</td>
+</tr>
+<tr class="even">
+<td>Derivative DTW (DDDTW)</td>
+<td>Using derivatives in time series classification. (Górecki and Łuczak 2013)</td>
+</tr>
+</tbody>
+</table>
+<p>已经提出了各种修改来加速 DTW 计算以及更好地控制规整路径的可能路线。在本节中，我们将讨论其中的一些变化，并参考[170]了解更多细节。</p>
+<p>更多细节可查阅参考资料 1。</p>
+<ul>
+<li>Step Size Condition</li>
+<li>Local Weights</li>
+<li>Global Constraints</li>
+<li>Approximations</li>
+</ul>
+<h2 id="multiscale-dtw"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>Multiscale DTW</h2>
+<p>更多细节可查阅参考资料 1。</p>
+<h2 id="subsequence-dtw"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>Subsequence DTW</h2>
+<p>更多细节可查阅参考资料 1。</p>
+<h1 id="python-代码实现"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>Python 代码实现</h1>
+<p>该算法的实现看起来非常简洁：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def dtw(s, t, window):</span><br><span class="line">    n, m = len(s), len(t)</span><br><span class="line">    w = np.max([window, abs(n-m)])</span><br><span class="line">    dtw_matrix = np.zeros((n+1, m+1))</span><br><span class="line">    </span><br><span class="line">    for i in range(n+1):</span><br><span class="line">        for j in range(m+1):</span><br><span class="line">            dtw_matrix[i, j] = np.inf</span><br><span class="line">    dtw_matrix[0, 0] = 0</span><br><span class="line">    </span><br><span class="line">    for i in range(1, n+1):</span><br><span class="line">        for j in range(np.max([1, i-w]), np.min([m, i+w])+1):</span><br><span class="line">            dtw_matrix[i, j] = 0</span><br><span class="line">    </span><br><span class="line">    for i in range(1, n+1):</span><br><span class="line">        for j in range(np.max([1, i-w]), np.min([m, i+w])+1):</span><br><span class="line">            cost = abs(s[i-1] - t[j-1])</span><br><span class="line">            </span><br><span class="line">            # take last min from a square box</span><br><span class="line">            last_min = np.min([dtw_matrix[i-1, j], dtw_matrix[i, j-1], dtw_matrix[i-1, j-1]])</span><br><span class="line">            dtw_matrix[i, j] = cost + last_min</span><br><span class="line">            </span><br><span class="line">    return dtw_matrix</span><br><span class="line"></span><br><span class="line">a = [1, 2, 3, 3, 5]</span><br><span class="line">b = [1, 2, 2, 2, 2, 2, 2, 4]</span><br><span class="line"></span><br><span class="line">dtw(a, b, window=3)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">array([[ 0., inf, inf, inf, inf, inf, inf, inf, inf],</span><br><span class="line">       [inf,  0.,  1.,  2.,  3., inf, inf, inf, inf],</span><br><span class="line">       [inf,  1.,  0.,  0.,  0.,  0., inf, inf, inf],</span><br><span class="line">       [inf,  3.,  1.,  1.,  1.,  1.,  1., inf, inf],</span><br><span class="line">       [inf,  5.,  2.,  2.,  2.,  2.,  2.,  2., inf],</span><br><span class="line">       [inf, inf,  5.,  5.,  5.,  5.,  5.,  5.,  3.]])</span><br><span class="line"></span><br><span class="line"># A和B之间的距离是矩阵的最后一个元素，即3。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其中 <code>DTW[i, j]</code> 是 <code>s[1:i]</code> 和 <code>t[1:j]</code> 之间具有最佳对齐的距离。也就是说，长度为 <code>i</code> 和 <code>j</code> 的两个数组之间的代价等于尾部之间的距离 + 长度为 <code>i-1, j</code> <em>,</em> <code>i, j-1</code> 和 <code>i-1, j-1</code> 的数组中代价的最小值。为了防止一个数组中的一个元素匹配另一个数组中的无限个元素（只要尾部可以匹配到最后），可以添加一个窗口约束来限制一个可以匹配的元素数量。这样，每个元素都被限制为匹配 i - w 和 i + w 范围内的元素。 w := max(w, abs(n-m)) 保证所有索引都可以匹配。</p>
+<p>调用第三方库实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from fastdtw import fastdtw</span><br><span class="line">from scipy.spatial.distance import euclidean</span><br><span class="line"></span><br><span class="line">x = np.array([1, 2, 3, 3, 7])</span><br><span class="line">y = np.array([1, 2, 2, 2, 2, 2, 2, 4])</span><br><span class="line"></span><br><span class="line">distance, path = fastdtw(x, y, dist=euclidean)</span><br><span class="line"></span><br><span class="line">print(distance)</span><br><span class="line">print(path)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5.0</span><br><span class="line">[(0, 0), (1, 1), (1, 2), (1, 3), (1, 4), (2, 5), (3, 6), (4, 7)]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>它提供了两个数组的距离和索引映射（该示例可以扩展到多维数组）。</p>
+<h1 id="参考资料"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39653948/article/details/124416873?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=dtw%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124416873.142%5Ev71%5Ejs_top,201%5Ev4%5Eadd_ask&amp;spm=1018.2226.3001.4187"></a>参考资料</h1>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-540-74048-3_4">Dynamic Time Warping (book, high cited in paper)</a></li>
+<li><a target="_blank" rel="noopener" href="https://databricks.com/blog/2019/04/30/understanding-dynamic-time-warping.html">Understanding Dynamic Time Warping (tutorial)</a></li>
+<li><a target="_blank" rel="noopener" href="https://towardsdatascience.com/dynamic-time-warping-3933f25fcdd">Dynamic Time Warping: Explanation and Code Implementation (tutorial)</a></li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://ZYJ1204.github.io">Bug Testing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zyj1204.github.io/2023/01/14/DTWl/">https://zyj1204.github.io/2023/01/14/DTWl/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AF%AD%E9%9F%B3%E7%89%B9%E5%BE%81/">语音特征</a></div><div class="post_share"><div class="social-share" data-image="https://img-blog.csdnimg.cn/c0028087889a44ffad2981f9f1bb7eb5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/13/pyin/" title="基音周期估计-pYin"><img class="cover" src="https://pic1.zhimg.com/v2-c8dfbcb8af5ba6e27374e4f5107e8e7c_r.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-13</div><div class="title">基音周期估计-pYin</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/assets/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bug Testing</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZYJ1204"><i></i><span>🛴前往Github...</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><center>快速访问：<br><a target="_blank" rel="noopener" href="https://www.baidu.com"><b><font color="#5ea6e5">百度</font></b></a></center></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dtw-%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">DTW 定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dtw-%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">DTW 计算过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dtw-%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="toc-number"></span> <span class="toc-text">DTW 形式化定义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E7%9A%84-dtw"><span class="toc-number">1.</span> <span class="toc-text">经典的 DTW</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dtw-%E7%9A%84%E5%8F%98%E4%BD%93"><span class="toc-number">2.</span> <span class="toc-text">DTW 的变体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#multiscale-dtw"><span class="toc-number">3.</span> <span class="toc-text">Multiscale DTW</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#subsequence-dtw"><span class="toc-number">4.</span> <span class="toc-text">Subsequence DTW</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number"></span> <span class="toc-text">Python 代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number"></span> <span class="toc-text">参考资料</span></a></div></div></div></div></main><footer id="footer" style="background-image: url('https://img-blog.csdnimg.cn/c0028087889a44ffad2981f9f1bb7eb5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAZGF0YW1vbmRheQ==,size_20,color_FFFFFF,t_70,g_se,x_16')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Bug Testing</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script defer src="/js/cursor.js"></script><script async src="/js/title.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="/js/sun_moon.js"></script><script defer data-pjax src="/js/readPercent.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script src="/js/jquery-3.6.0.min.js"></script><script src="/js/rightmenu.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.34532,23.15624';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题使用Butterfly" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.min.js"></script><!-- hexo injector body_end end --></body></html>
